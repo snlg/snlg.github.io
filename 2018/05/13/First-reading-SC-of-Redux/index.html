@@ -89,7 +89,7 @@
 <meta property="og:description" content="浅析Redux源码@(Redux)[|用法|源码] Redux 由Dan Abramov在2015年创建的科技术语。是受2014年Facebook的Flux架构以及函数式编程语言Elm启发。很快，Redux因其简单易学体积小短时间内成为最热门的前端架构。 @[三大原则]  单一数据源 - 整个应用的state被储存在一棵object tree中，并且这个object tree只存在于唯一一个sto">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/%E6%B4%8B%E8%91%B1%E6%A8%A1%E5%9E%8B.png">
-<meta property="og:updated_time" content="2018-05-13T04:38:20.000Z">
+<meta property="og:updated_time" content="2018-05-13T04:42:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="First reading SC of Redux">
 <meta name="twitter:description" content="浅析Redux源码@(Redux)[|用法|源码] Redux 由Dan Abramov在2015年创建的科技术语。是受2014年Facebook的Flux架构以及函数式编程语言Elm启发。很快，Redux因其简单易学体积小短时间内成为最热门的前端架构。 @[三大原则]  单一数据源 - 整个应用的state被储存在一棵object tree中，并且这个object tree只存在于唯一一个sto">
@@ -297,7 +297,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2,283
+                  2,338
                 </span>
               
 
@@ -387,7 +387,7 @@
 </ul>
 <hr>
 <p>Thank you for reading this record. </p>
-<p>比如 slice 和 splice，这两个函数的作用并无二致——但是注意，它们各自的方式却大不同，但不管怎么说作用还是一样的。我们说 slice 符合纯函数的定义是因为对相同的输入它保证能返回相同的输出。而 splice 却会嚼烂调用它的那个数组，然后再吐出来；这就会产生可观察到的副作用，即这个数组永久地改变了。可以看到，splice改变了原始数组，而slice没有。我们认为，slice不改变原来数组的方式更加“安全”。改变原始组数，是一种“副作用”。. </p>
+<p>纯函数: 它不依赖于外部环境（例如：全局变量、环境变量）、不改变外部环境（例如：发送请求、改变DOM结构），函数的输出完全由函数的输入决定。 比如 slice 和 splice，这两个函数的作用并无二致——但是注意，它们各自的方式却大不同，但不管怎么说作用还是一样的。我们说 slice 符合纯函数的定义是因为对相同的输入它保证能返回相同的输出。而 splice 却会嚼烂调用它的那个数组，然后再吐出来；这就会产生可观察到的副作用，即这个数组永久地改变了。可以看到，splice改变了原始数组，而slice没有。我们认为，slice不改变原来数组的方式更加“安全”。改变原始组数，是一种“副作用”。. </p>
 
       
     </div>
@@ -607,7 +607,7 @@
 </div>
 <div class="theme-info" style='display:block'>
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共3.0k字</span>
+  <span class="post-count">博客全站共3.1k字</span>
 </div>
 <div class="powered-by">
   <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
