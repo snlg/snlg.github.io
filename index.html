@@ -294,7 +294,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2,338
+                  2,394
                 </span>
               
 
@@ -339,7 +339,7 @@
 <ul>
 <li><strong>单一数据源</strong> - 整个应用的<code>state</code>被储存在一棵<code>object tree</code>中，并且这个<code>object tree</code>只存在于唯一一个<code>store</code>中。所有数据会通过<code>store.getState()</code>方法调用获取.</li>
 <li><strong>State‘只读’ </strong> -  根据<code>State</code>只读原则，数据变更会通过<code>store,dispatch(action)</code>方法.</li>
-<li><strong>使用纯函数修改</strong> -<code>Reducer</code>只是一些纯函数<a href="纯函数，它不依赖于外部环境（例如：全局变量、环境变量）、不改变外部环境（例如：发送请求、改变DOM结构），函数的输出完全由函数的输入决定。">^demo</a>，它接收先前的<code>state</code>和<code>action</code>，并返回新的<code>state</code>.</li>
+<li><strong>使用纯函数修改</strong> -<code>Reducer</code>只是一些纯函数[^demo]，它接收先前的<code>state</code>和<code>action</code>，并返回新的<code>state</code>.</li>
 </ul>
 <hr>
 <p>[TOC]</p>
@@ -386,7 +386,7 @@
 </ul>
 <hr>
 <p>Thank you for reading this record. </p>
-<p>纯函数: 它不依赖于外部环境（例如：全局变量、环境变量）、不改变外部环境（例如：发送请求、改变DOM结构），函数的输出完全由函数的输入决定。 比如 slice 和 splice，这两个函数的作用并无二致——但是注意，它们各自的方式却大不同，但不管怎么说作用还是一样的。我们说 slice 符合纯函数的定义是因为对相同的输入它保证能返回相同的输出。而 splice 却会嚼烂调用它的那个数组，然后再吐出来；这就会产生可观察到的副作用，即这个数组永久地改变了。可以看到，splice改变了原始数组，而slice没有。我们认为，slice不改变原来数组的方式更加“安全”。改变原始组数，是一种“副作用”。. </p>
+<p>[^demo]: 纯函数，它不依赖于外部环境（例如：全局变量、环境变量）、不改变外部环境（例如：发送请求、改变DOM结构），函数的输出完全由函数的输入决定。纯函数: 它不依赖于外部环境（例如：全局变量、环境变量）、不改变外部环境（例如：发送请求、改变DOM结构），函数的输出完全由函数的输入决定。 比如 slice 和 splice，这两个函数的作用并无二致——但是注意，它们各自的方式却大不同，但不管怎么说作用还是一样的。我们说 slice 符合纯函数的定义是因为对相同的输入它保证能返回相同的输出。而 splice 却会嚼烂调用它的那个数组，然后再吐出来；这就会产生可观察到的副作用，即这个数组永久地改变了。可以看到，splice改变了原始数组，而slice没有。我们认为，slice不改变原来数组的方式更加“安全”。改变原始组数，是一种“副作用”。. </p>
 
           
         
@@ -623,7 +623,7 @@
 <h2 id="Credits"><a href="#Credits" class="headerlink" title="Credits"></a>Credits</h2><p><strong>Marxico</strong> was first built upon <a href="http://dillinger.io" target="_blank" rel="noopener">Dillinger</a>, and the newest version is almost based on the awesome <a href="http://stackedit.io" target="_blank" rel="noopener">StackEdit</a>. Acknowledgments to them and other incredible open source projects!</p>
 <h2 id="Feedback-amp-Bug-Report"><a href="#Feedback-amp-Bug-Report" class="headerlink" title="Feedback &amp; Bug Report"></a>Feedback &amp; Bug Report</h2><ul>
 <li>Twitter: <a href="https://twitter.com/gock2" target="_blank" rel="noopener">@gock2</a></li>
-<li>Email: <a href="mailto:&#x68;&#117;&#x73;&#x74;&#103;&#111;&#x63;&#x6b;&#64;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#x63;&#111;&#109;" target="_blank" rel="noopener">&#x68;&#117;&#x73;&#x74;&#103;&#111;&#x63;&#x6b;&#64;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#x63;&#111;&#109;</a></li>
+<li>Email: <a href="mailto:&#x68;&#x75;&#115;&#116;&#x67;&#111;&#99;&#x6b;&#64;&#103;&#109;&#97;&#105;&#x6c;&#x2e;&#99;&#x6f;&#109;" target="_blank" rel="noopener">&#x68;&#x75;&#115;&#116;&#x67;&#111;&#99;&#x6b;&#64;&#103;&#109;&#97;&#105;&#x6c;&#x2e;&#99;&#x6f;&#109;</a></li>
 </ul>
 <hr>
 <p>Thank you for reading this manual. Now please press <code>Ctrl + M</code> and click <code>Link with Evernote</code>. Enjoy your <strong>Marxico</strong> journey!</p>
