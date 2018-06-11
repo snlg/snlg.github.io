@@ -81,17 +81,19 @@
 
 
 
-<meta name="description" content="stronger.....">
+<meta name="description" content="小程序原理解析小程序：  好处和背景就不多介绍了。（以下简称:mp）  项目结构  - 文件角度.       运行环境  - 多端运行环境. 对比H5     - 技术栈角度对比. 加载过程  - 从打开小程序到展示页面的流程. 设计理念  - 框架层面.   ##项目结构我们主要看 app.js、app.js、app.wxss三个文件和pages文件夹里面的wxml  app.js做为小程序的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="miniProgram thinking (1)">
 <meta property="og:url" content="http://yoursite.com/2018/06/11/miniProgram-thinking-1/index.html">
 <meta property="og:site_name" content="博客 | 西爽">
-<meta property="og:description" content="stronger.....">
+<meta property="og:description" content="小程序原理解析小程序：  好处和背景就不多介绍了。（以下简称:mp）  项目结构  - 文件角度.       运行环境  - 多端运行环境. 对比H5     - 技术栈角度对比. 加载过程  - 从打开小程序到展示页面的流程. 设计理念  - 框架层面.   ##项目结构我们主要看 app.js、app.js、app.wxss三个文件和pages文件夹里面的wxml  app.js做为小程序的">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-11T14:02:54.000Z">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/mina-lifecycle.png">
+<meta property="og:updated_time" content="2018-06-11T15:30:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="miniProgram thinking (1)">
-<meta name="twitter:description" content="stronger.....">
+<meta name="twitter:description" content="小程序原理解析小程序：  好处和背景就不多介绍了。（以下简称:mp）  项目结构  - 文件角度.       运行环境  - 多端运行环境. 对比H5     - 技术栈角度对比. 加载过程  - 从打开小程序到展示页面的流程. 设计理念  - 框架层面.   ##项目结构我们主要看 app.js、app.js、app.wxss三个文件和pages文件夹里面的wxml  app.js做为小程序的">
+<meta name="twitter:image" content="http://oy0oxkhrp.bkt.clouddn.com/mina-lifecycle.png">
 
 
 
@@ -315,7 +317,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  1,870
                 </span>
               
 
@@ -331,7 +333,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  7
                 </span>
               
             </div>
@@ -352,7 +354,111 @@
       
 
       
-        
+        <h1 id="小程序原理解析"><a href="#小程序原理解析" class="headerlink" title="小程序原理解析"></a>小程序原理解析</h1><p><strong>小程序：</strong>  好处和背景就不多介绍了。（以下简称:mp）</p>
+<ul>
+<li><strong>项目结构</strong>  - 文件角度.      </li>
+<li><strong>运行环境</strong>  - 多端运行环境.</li>
+<li><strong>对比H5</strong>     - 技术栈角度对比.</li>
+<li><strong>加载过程</strong>  - 从打开小程序到展示页面的流程.</li>
+<li><strong>设计理念</strong>  - 框架层面.</li>
+</ul>
+<hr>
+<p>##项目结构<br>我们主要看 <code>app.js</code>、<code>app.js</code>、<code>app.wxss</code>三个文件和<code>pages</code>文件夹里面的<code>wxml</code></p>
+<ul>
+<li><code>app.js</code>做为小程序的入口，里面有个<code>App</code>实例，每个小程序只会有一个<code>App</code>实例，小程序启动以后触发<code>onLaunch</code>函数执行，获取用户信息</li>
+<li><code>app.json</code>是小程序的所有全局配置，<code>pages</code>字段放置所有页面的路径，<code>window</code>字段定义所有页面的顶部背景颜色，文字颜色.</li>
+<li><code>app.wxss</code>文件就是页面公用的样式，仅支持部分<code>css</code>选择器</li>
+<li><code>wxml</code> 就是我们的HTML文件，常用标签为<code>view</code> 、<code>text</code>等，没有所谓的<code>div</code>、<code>span</code>、<code>p</code>一类的标签了，我们习惯称它们为组件</li>
+</ul>
+<h2 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h2><p><code>mp</code>运行在三端：<code>iOS</code>、<code>Android</code>和 用于调试的开发者工具</p>
+<ul>
+<li><p>1: 在<code>iOS</code>上，小程序的<code>javascript</code> 代码是运行在<code>JavaScriptCore</code> 中。</p>
+<blockquote>
+<p><code>JavaScriptCore</code>框架 是一个苹果在<code>iOS7</code>引入的框架，该框架让<code>Objective-C</code> 和<code>JavaScript</code> 代码直接的交互变得更加的简单方便。</p>
+</blockquote>
+</li>
+<li><p>2: 在<code>Android</code>上，<code>mp</code>的<code>javascript</code> 代码是通过<code>X5</code> 内核来解析</p>
+<blockquote>
+<p><code>X5</code> 内核于<code>qq浏览器</code>的内核一致。</p>
+</blockquote>
+</li>
+<li><p>3: 在开发工具上，<code>mp</code>的<code>javascript</code> 代码是运行在<code>nwjs(chrome内核)</code> 中</p>
+<blockquote>
+<p><code>nwjs</code>使得<code>Browser</code>和<code>Node.js</code>共同运行，可以使用前端开发技术来开发跨平台的应用程序。借助 <code>Node.js</code> 访问操作系统原生<code>API</code> 的能力，可以开发中跨平台的应用程序。<code>nwjs</code> 与<code>Electron</code>类似。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="对比H5"><a href="#对比H5" class="headerlink" title="对比H5"></a>对比H5</h2><p><code>mp</code>使用了前端技术栈 <code>JavaScript/WXML/WXSS</code>。但和常规的前端开发又有一些区别：</p>
+<ul>
+<li><p>JS: <code>mp</code>的 <code>js</code>运行环境即不是 <code>Browser</code> 也不是 <code>Node.js</code>。它运行在微信 <code>App</code> 的上下文中，不能操作 <code>Browser context</code>下的 <code>DOM</code>，所以，严格意义来讲，微信小程序并不是 <code>Html5</code>，虽然开发过程和用到的技术栈和 <code>Html5</code> 是相通的。</p>
+</li>
+<li><p>WXML: 作为微信小程序的展示层，并不是使用 <code>Html</code>，而是自己发明的基于 <code>XML</code> 语法的描述。</p>
+</li>
+<li><p>WXSS:  具有 <code>CSS</code> 大部分特性。仅支持<code>CSS</code>语法，正因为如此市面上的所有轮子都拓展了预处理器。</p>
+</li>
+</ul>
+<h2 id="加载过程"><a href="#加载过程" class="headerlink" title="加载过程"></a>加载过程</h2><ul>
+<li>用户点击打开一个小程序</li>
+<li>微信 <code>App</code> 从微信服务器下载这个小程序（涉及到任何跨域问题的都由白名单处理）</li>
+<li>分析 <code>app.json</code>得到应用程序的配置信息（导航栏，窗口样式，包含的页面列表等）</li>
+<li>加载并运行<code>app.js</code></li>
+<li>加载并显示在 <code>app.json</code> 里配置的第一个页面</li>
+</ul>
+<p>这个只是从开发者眼中看到的一个简化版的过程，实际过程应该比这要复杂得多，涉及到浏览器线程（就是运行我们的逻辑层代码 <code>app.js</code> 等的线程）和 <code>AppService</code>线程之间的交互。从官方网站上的一个图片可以看出端倪：<br><img src="http://oy0oxkhrp.bkt.clouddn.com/mina-lifecycle.png" alt="enter image description here"></p>
+<p>##设计理念<br>小程序内部可以理解成一个<code>MVVM</code>的框架，分为逻辑层和视图层，逻辑层将数据进行处理后发送给视图层，同时接受视图层的事件反馈。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// pages/map/index.js</span></span><br><span class="line">Page(&#123;</span><br><span class="line">  data:&#123;  <span class="comment">// 页面的初始数据</span></span><br><span class="line">      text: <span class="string">'hello world'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  onLoad()&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  change()&#123;</span><br><span class="line">    <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">    text:<span class="string">'hello'</span></span><br><span class="line">  &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>使用<code>Page</code>函数来注册一个页面，接收一个<code>Object</code>参数。 这里我们使用了<code>onLoad</code>来监听页面的加载和定义了一个<code>change</code>函数 并使用<code>setData</code>函数将<code>text</code>的值进行更改<br><figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// pages/map/index.wxml</span><br><span class="line">&lt;view&gt;&#123;&#123;text&#125;&#125;&lt;/view&gt; //  显示hello world</span><br><span class="line">&lt;button bindtap="change"&gt;点击更改上面文字&lt;/button&gt; //  显示hello</span><br></pre></td></tr></table></figure></p>
+<p>####事件传递参数<br>有时候我们需要触发事件的时候，传递一些参数，那小程序怎么传递呢？很不幸，小程序不能类似<code>js</code>里面直接传递，往往我们需要将传递的数据绑定到事件元素上<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// index.wxml</span><br><span class="line">&lt;button data-test=&quot;哈哈&quot;  bindtap=&quot;change&quot;&gt;点击我&lt;/button&gt;</span><br></pre></td></tr></table></figure></p>
+<p>使用<code>e.currentTarget.dataset</code>来获取值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// index.js</span><br><span class="line">change(e)&#123;</span><br><span class="line">  e.currentTarget.dataset.test  // 哈哈</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>####setData函数拓展<br>修改嵌套多层的数据， 如果是写死的参数可以使用引号将参数包起来<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">this.setData(&#123;</span><br><span class="line">    &apos;text.msg&apos;: &apos;hello&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>如果是传递进来的值呢？很简单将<code>data</code>的<code>key</code>用<code>[]</code>括起来<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// index.wxml</span><br><span class="line">&lt;button bindtap=&quot;change&quot; data-key=&quot;text.msg&quot;&gt;点击我&lt;/button&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// index.js</span><br><span class="line">change(e)&#123;</span><br><span class="line">var key = e.currentTarget.dataset.key</span><br><span class="line">  this.setData(&#123;</span><br><span class="line">    key: &apos;hello&apos;     // 数据不会更改</span><br><span class="line">  //  [key]: &apos;hello&apos; //  数据会更改</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h4><p>小程序里面所有的页面路由由框架进行管理</p>
+<p>我们可以使用<code>getCurrnetPages</code>函数获取当前页面栈的实例，返回一个数组, 最后一个元素为当前页面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/* 获取当前页url */</span><br><span class="line">  getCurrentPageUrl () &#123;</span><br><span class="line">    var pages = getCurrentPages()    // 获取加载的页面</span><br><span class="line">    var currentPage = pages[pages.length - 1]    // 获取当前页面的对象</span><br><span class="line">    var url = currentPage.route    // 当前页面url</span><br><span class="line">    return url</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<p>小程序定义了五个用于导航跳转的<code>API</code></p>
+<ul>
+<li><p><code>wx.navigateTo(OBJECT)</code></p>
+<blockquote>
+<p>保留当前页面，跳转到应用内的某个页面，使用<code>wx.navigateBack</code>可以返回到原页面。(<code>router.push(location)=====window.history.pushState</code>)</p>
+</blockquote>
+</li>
+<li><p><code>wx.redirectTo(OBJECT)</code></p>
+<blockquote>
+<p>关闭当前页面，跳转到应用内的某个页面。(<code>router.replace(location)=====window.history.replaceState</code>)</p>
+</blockquote>
+</li>
+<li><p><code>wx.reLaunch(OBJECT)</code></p>
+<blockquote>
+<p>关闭所有页面，打开到应用内的某个页面。(<code>ctx.redirect() || 服务端重定向</code>)</p>
+</blockquote>
+</li>
+<li><p><code>wx.switchTab(OBJECT)</code></p>
+<blockquote>
+<p>跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面</p>
+</blockquote>
+</li>
+<li><p><code>wx.navigateBack(OBJECT)</code></p>
+<blockquote>
+<p>关闭当前页面，返回上一页面或多级页面。(<code>router.go(-1) || history.back() || window.location.href = document.referrer</code>)<br>通过上面的<code>API</code>跳转带的参数，在页面上我们需要怎么获取呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// text.js</span><br><span class="line">Page(&#123;</span><br><span class="line">  data:&#123;</span><br><span class="line">     ... // 页面数据</span><br><span class="line">  &#125;,</span><br><span class="line">  onLoad(options)&#123;</span><br><span class="line">    console.log(options.text)  // options获取上个页面带过来的值</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ul>
+<h4 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h4><p>如果你使用过<code>vue</code>、<code>angular</code>框架，对<code>|</code>管道符肯定不陌生，它用来对我们的数据进行转换，那小程序里面有没有过滤器呢，不过这个是真没有。<br>但是目前有两种方法，可以实现过滤。</p>
+<ul>
+<li>获取数据的时候，直接改了，干脆利落、好不优雅。</li>
+<li>使用最后我们要介绍的<code>wxs</code></li>
+</ul>
+<p>我们来实现一个使用<code>wxs</code>实现一个简单的过滤器 ,首先我们创建<code>filter.wxs</code>文件并写入以下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// filter.wxs</span><br><span class="line">var Filter = &#123;</span><br><span class="line">  getSatusStr: function(num)&#123;</span><br><span class="line">    var str = &apos;&apos;;</span><br><span class="line">    switch (num) &#123;</span><br><span class="line">      case 0:</span><br><span class="line">        string = &apos;我是0的状态&apos;</span><br><span class="line">        break;</span><br><span class="line">      case 1:</span><br><span class="line">        string = &apos;我是1的状态&apos;</span><br><span class="line">        break;</span><br><span class="line">      default:</span><br><span class="line">        string = &apos;我是默认的状态&apos;</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    return str</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">module.exports = &#123;</span><br><span class="line">  status: Filter.getSatusStr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>同级下<code>index.wxml</code>使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;wxs module=&quot;filter&quot; src=&quot;./filter.wxs&quot;&gt;&lt;/wxs&gt; </span><br><span class="line">&lt;view wx:for=&quot;&#123;&#123;list&#125;&#125;&quot;&gt;</span><br><span class="line">  &lt;view&gt;&#123;&#123;filter.status(item.status)&#125;&#125;&lt;/view&gt;  </span><br><span class="line">&lt;/view&gt;</span><br></pre></td></tr></table></figure></p>
+<p>总结：</p>
+<ul>
+<li>每个<code>wxs</code>标签都有一个<code>module</code>属性</li>
+<li><code>wxs</code>可以写在<code>wxml</code>里面的<code>wxs</code>标签里和<code>.wxs</code>文件里</li>
+<li><code>wxs</code>文件中引入其他<code>wxs</code>文件时候，可以使用<code>require</code>函数，接受相对路径</li>
+<li>在<code>wxml</code>标签里使用外部<code>wxs</code>文件的时候，<code>src</code>属性是相对路径</li>
+</ul>
+<p>##写在最后<br>小程序挺好玩的。</p>
+
       
     </div>
     
@@ -441,8 +547,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -554,6 +669,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#小程序原理解析"><span class="nav-number">1.</span> <span class="nav-text">小程序原理解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#运行环境"><span class="nav-number">1.1.</span> <span class="nav-text">运行环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对比H5"><span class="nav-number">1.2.</span> <span class="nav-text">对比H5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加载过程"><span class="nav-number">1.3.</span> <span class="nav-text">加载过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#路由"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#过滤器"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">过滤器</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -578,7 +709,7 @@
 </div>
 <div class="theme-info" style='display:block'>
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共5.0k字</span>
+  <span class="post-count">博客全站共5.2k字</span>
 </div>
 <div class="powered-by">
   <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">

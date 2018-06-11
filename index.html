@@ -317,7 +317,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,870
+                  201
                 </span>
               
 
@@ -333,7 +333,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  7
+                  1
                 </span>
               
             </div>
@@ -356,16 +356,10 @@
       
         
           
-          小程序原理解析小程序：  好处和背景就不多介绍了。（以下简称:mp）
+          记录下小程序开发过程中遇到的一些问题以及解决方案####1: button 默认样式:: after上下边框问题解决方法：123button[class="CLASSNAME"]::after &#123;  border: 0;&#125;
+####2: 基础事件
 
-项目结构  - 文件角度.      
-运行环境  - 多端运行环境.
-对比H5     - 技术栈角度对比.
-加载过程  - 从打开小程序到展示页面的流程.
-设计理念  - 框架层面.
-
-
-##项目结构我们主要看 app.js
+bindtap:冒泡事件 会从
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -484,7 +478,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  1,870
                 </span>
               
 
@@ -500,7 +494,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  7
                 </span>
               
             </div>
@@ -523,8 +517,17 @@
       
         
           
-          
-          
+          小程序原理解析小程序：  好处和背景就不多介绍了。（以下简称:mp）
+
+项目结构  - 文件角度.      
+运行环境  - 多端运行环境.
+对比H5     - 技术栈角度对比.
+加载过程  - 从打开小程序到展示页面的流程.
+设计理念  - 框架层面.
+
+
+##项目结构我们主要看 app.js
+          ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/06/11/miniProgram-thinking-1/#more" rel="contents">
@@ -1234,7 +1237,7 @@ Marxico is a delicate Markdown editor for Evernote. With reliable storage and sy
 </div>
 <div class="theme-info" style='display:block'>
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共5.0k字</span>
+  <span class="post-count">博客全站共5.2k字</span>
 </div>
 <div class="powered-by">
   <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
