@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="博客 | 西爽" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="基于摩拜小程序分析 小程序：  功能介绍  - 开发基础拓展。 技术演变  - 技术演变的案例。 组件化开发 - 官方组件化详解。 跨端能力 - H5,APP,小程序间的交互。   功能介绍相较 HTML，小程序的标签显得更加简洁，比如 div、section 、header等块级标签统一为 view，p、span、b 等文案类标签统一为 text，同时也新增了很多实用标签，比如 picker 滚">
+<meta property="og:type" content="article">
+<meta property="og:title" content="miniProgram thinking (2)">
+<meta property="og:url" content="http://yoursite.com/2018/07/10/miniProgram-thinking-2/index.html">
+<meta property="og:site_name" content="博客 | 西爽">
+<meta property="og:description" content="基于摩拜小程序分析 小程序：  功能介绍  - 开发基础拓展。 技术演变  - 技术演变的案例。 组件化开发 - 官方组件化详解。 跨端能力 - H5,APP,小程序间的交互。   功能介绍相较 HTML，小程序的标签显得更加简洁，比如 div、section 、header等块级标签统一为 view，p、span、b 等文案类标签统一为 text，同时也新增了很多实用标签，比如 picker 滚">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/2.jpeg">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/WechatIMG2.jpeg">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/WX20180710-161457@2x.png">
+<meta property="og:updated_time" content="2018-07-10T09:35:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="miniProgram thinking (2)">
+<meta name="twitter:description" content="基于摩拜小程序分析 小程序：  功能介绍  - 开发基础拓展。 技术演变  - 技术演变的案例。 组件化开发 - 官方组件化详解。 跨端能力 - H5,APP,小程序间的交互。   功能介绍相较 HTML，小程序的标签显得更加简洁，比如 div、section 、header等块级标签统一为 view，p、span、b 等文案类标签统一为 text，同时也新增了很多实用标签，比如 picker 滚">
+<meta name="twitter:image" content="http://oy0oxkhrp.bkt.clouddn.com/2.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/10/miniProgram-thinking-2/"/>
+
+
+
+
+
+  <title>miniProgram thinking (2) | 博客 | 西爽</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/snlg" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">博客 | 西爽</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/10/miniProgram-thinking-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xishuang Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oy0oxkhrp.bkt.clouddn.com/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客 | 西爽">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">miniProgram thinking (2)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-10T14:53:41+08:00">
+                2018-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,965
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="基于摩拜小程序分析"><a href="#基于摩拜小程序分析" class="headerlink" title="基于摩拜小程序分析"></a>基于摩拜小程序分析</h1><p><img src="http://oy0oxkhrp.bkt.clouddn.com/2.jpeg" alt="enter image description here"></p>
+<p><strong>小程序：</strong></p>
+<ul>
+<li><strong>功能介绍</strong>  - 开发基础拓展。</li>
+<li><strong>技术演变</strong>  - 技术演变的案例。</li>
+<li><strong>组件化开发</strong> - 官方组件化详解。</li>
+<li><strong>跨端能力</strong> - H5,APP,小程序间的交互。</li>
+</ul>
+<hr>
+<h2 id="功能介绍"><a href="#功能介绍" class="headerlink" title="功能介绍"></a>功能介绍</h2><p>相较 <code>HTML</code>，小程序的标签显得更加简洁，比如 <code>div</code>、<code>section</code> 、<code>header</code>等块级标签统一为 <code>view</code>，<code>p</code>、<code>span</code>、<code>b</code> 等文案类标签统一为 <code>text</code>，同时也新增了很多实用标签，比如 <code>picker</code> 滚动选择器、<code>map</code> 地图、<code>web-view</code> 网页容器等。</p>
+<p>可以简单理解为，小程序所有的标签都是原生组件。</p>
+<p>相比在Taro中，我们可以直接使用小程序的组件。但是若项目需要支持多端的话，则会有所约束，例如需要同时支持H5在使用时，我们需要先从<code>Taro</code> 标准组件库 <code>@tarojs/components</code>引用组件，再进行使用。(<code>RN端</code>，使用<code>@tarojs/components-rn</code>)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Taro, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'@tarojs/taro'</span></span><br><span class="line"><span class="keyword">import</span> &#123; View, Text &#125; <span class="keyword">from</span> <span class="string">'@tarojs/components'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;View className=<span class="string">'c'</span>&gt;</span><br><span class="line">        &lt;Text&gt;c component&lt;<span class="regexp">/Text&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>View&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="技术演变"><a href="#技术演变" class="headerlink" title="技术演变"></a>技术演变</h2><h3 id="非组件化-gt-组件化"><a href="#非组件化-gt-组件化" class="headerlink" title="非组件化 =&gt; 组件化"></a>非组件化 =&gt; 组件化</h3><p>最初不支持组件化的时候, 原理就是<code>WXML</code>使用<code>template</code> 片段，再一步步<code>merge</code> 组件和 <code>Page</code> 的 <code>data</code> 和 <code>method</code>，最终实现简易的组件化功能。<br>从小程序基础库版本 <code>1.6.3</code>开始，小程序官方支持了组件化编程。</p>
+<p>这里聊下基础库版本。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sysInfo = wx.getSystemInfoSync()</span><br><span class="line"><span class="keyword">let</span> version = sysInfo.SDKVersion &amp;&amp; sysInfo.SDKVersion.split(<span class="string">'.'</span>)</span><br><span class="line"><span class="keyword">if</span> (version) &#123;</span><br><span class="line">  version = <span class="built_in">parseFloat</span>(<span class="string">`<span class="subst">$&#123;version[<span class="number">0</span>]&#125;</span>.<span class="subst">$&#123;version[<span class="number">1</span>]&#125;</span><span class="subst">$&#123;version[<span class="number">2</span>]&#125;</span>&#125;`</span>)</span><br><span class="line">  wx.setStorageSync(<span class="string">'SDKversion'</span>, version)</span><br><span class="line">  <span class="keyword">if</span> (version &lt; <span class="number">1.44</span>) &#123;</span><br><span class="line">    wx.showModal(&#123;</span><br><span class="line">      title: <span class="string">'提示'</span>,</span><br><span class="line">      content: <span class="string">'当前微信版本过低，将影响小程序的正常使用，请升级到最新微信版本后重试。'</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再看下基础库的官方支持程度。</p>
+<p><img src="http://oy0oxkhrp.bkt.clouddn.com/WechatIMG2.jpeg" alt="当前基础库支持程度"></p>
+<h3 id="跨页面通信"><a href="#跨页面通信" class="headerlink" title="跨页面通信"></a>跨页面通信</h3><h4 id="1-官方做法"><a href="#1-官方做法" class="headerlink" title="1:官方做法"></a>1:官方做法</h4><blockquote>
+<p><code>getApp()</code>可以用来获取到小程序实例的全局函数，在页面实例化之后，<code>getApp()</code>被挂满各个页面的方法，以便被互相调用。但你要准确知道每个方法在哪个页面，且每次都需要获取到对应的页面对象，显得十分繁琐。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// page A</span></span><br><span class="line">Page(&#123;</span><br><span class="line">  data: &#123;&#125;,</span><br><span class="line">  showRiding() &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// page B</span></span><br><span class="line">Page(&#123;</span><br><span class="line">  data: &#123;&#125;,</span><br><span class="line">  onUnlockSuccess() &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">const</span> pageA = getCurrentPages().filter(<span class="function">(<span class="params">page</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> page.route == <span class="string">'pages/A/index'</span></span><br><span class="line">    &#125;)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (pageA) &#123;</span><br><span class="line">      pageA.showRiding()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="2-摩拜方法"><a href="#2-摩拜方法" class="headerlink" title="2 摩拜方法"></a>2 摩拜方法</h4><blockquote>
+<p>使用了自行封装的 <code>broadcast</code>，作为统一的事件广播触发机制<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> broadcast = &#123;</span><br><span class="line">  on: <span class="function"><span class="keyword">function</span>(<span class="params">name, fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> data = broadcast.data</span><br><span class="line">    <span class="keyword">if</span> (data.hasOwnProperty(name)) &#123;</span><br><span class="line">      data[name].push(fn)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      data[name] = [fn]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">  &#125;,</span><br><span class="line">  fire: <span class="function"><span class="keyword">function</span>(<span class="params">name, data, thisArg</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> fnList = broadcast.data[name] || []</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>, len = fnList.length; i &lt; len; i++) &#123;</span><br><span class="line">      fnList[i].apply(thisArg || <span class="literal">null</span>, [data, name])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">  &#125;,</span><br><span class="line">  data: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><code>broadcast</code>在项目中的使用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// page A</span></span><br><span class="line">Page(&#123;</span><br><span class="line">  data: &#123;&#125;,</span><br><span class="line">  onLoad() &#123;</span><br><span class="line">    broadcast.on(<span class="string">'showRiding'</span>, <span class="keyword">this</span>.showRiding.bind(<span class="keyword">this</span>))</span><br><span class="line">  &#125;</span><br><span class="line">  showRiding() &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// page B</span></span><br><span class="line">Page(&#123;</span><br><span class="line">  data: &#123;&#125;,</span><br><span class="line">  onUnlockSuccess() &#123;</span><br><span class="line">    broadcast.fire(<span class="string">'showRiding'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="组件基础"><a href="#组件基础" class="headerlink" title="组件基础"></a>组件基础</h2><h4 id="组件定义"><a href="#组件定义" class="headerlink" title="组件定义"></a>组件定义</h4><p>组件需要定义在 <code>pages/</code>目录下，类似于页面，一个自定义组件由 <code>json</code>、 <code>wxml</code>、<code>wxss</code> 和<code>js</code>4 个文件组成。</p>
+<p>要编写一个自定义组件，首先需要在<code>json</code>文件中进行自定义组件声明：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"component"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="组件引用"><a href="#组件引用" class="headerlink" title="组件引用"></a>组件引用</h4><p>在页面中引入组件，需要在<code>json</code>文件中进行定义：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"navigationBarTextStyle"</span>: <span class="string">"black"</span>,</span><br><span class="line">  <span class="string">"usingComponents"</span>: &#123;</span><br><span class="line">    <span class="string">"component-dialog"</span>: <span class="string">"../components/dialog/index"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>定义后，就可以在页面中使用标签了，例如：<br><figure class="highlight htmlbars"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;component-dialog&gt;&lt;/component-dialog&gt;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意: </p>
+<ul>
+<li>1: 组件名字不能带有数字。</li>
+<li>2: 在<code>&lt;map&gt;</code>上使用组件，引用组件时要嵌套一层<code>cover-view</code></li>
+</ul>
+</blockquote>
+<figure class="highlight htmlbars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;map&gt;</span><br><span class="line">  &lt;cover-view&gt;</span><br><span class="line">    &lt;!-- 引入自定义组件 --&gt;</span><br><span class="line">    &lt;component-map-dialog&gt;&lt;/component-map-dialog&gt;</span><br><span class="line">  &lt;/cover-view&gt;</span><br><span class="line">&lt;/map&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="父子通信"><a href="#父子通信" class="headerlink" title="父子通信"></a>父子通信</h4><h6 id="父组件向子组件传递信息"><a href="#父组件向子组件传递信息" class="headerlink" title="父组件向子组件传递信息"></a>父组件向子组件传递信息</h6><p>父组件向子组件通信，是通过传入<code>properties</code>的形式。子组件中定义<code>properties</code>类型、默认值等，父组件传入，示例如下:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件:</span></span><br><span class="line">properties: &#123;</span><br><span class="line">  visible: &#123;</span><br><span class="line">    type: <span class="built_in">Boolean</span>,</span><br><span class="line">    value: <span class="literal">false</span> <span class="comment">// 默认值</span></span><br><span class="line">  &#125;,</span><br><span class="line">  content: <span class="built_in">String</span></span><br><span class="line">&#125;,</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 父组件:</span></span><br><span class="line">&lt;component-dialog visible=<span class="string">"&#123;&#123;visible&#125;&#125;"</span> content=<span class="string">"text"</span>&gt;&lt;/component-dialog&gt;</span><br></pre></td></tr></table></figure></p>
+<h6 id="子组件向父组件传递信息"><a href="#子组件向父组件传递信息" class="headerlink" title="子组件向父组件传递信息"></a>子组件向父组件传递信息</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件中</span></span><br><span class="line">Component(&#123;</span><br><span class="line">  properties: &#123;&#125;</span><br><span class="line">  methods: &#123;</span><br><span class="line">    onTap: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> myEventDetail = &#123;&#125; <span class="comment">// detail对象，提供给事件监听函数</span></span><br><span class="line">      <span class="keyword">var</span> myEventOption = &#123;&#125; <span class="comment">// 触发事件的选项</span></span><br><span class="line">      <span class="keyword">this</span>.triggerEvent(<span class="string">'myevent'</span>, myEventDetail, myEventOption)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 父级页面 js</span></span><br><span class="line">onTap (data) &#123;</span><br><span class="line">  <span class="comment">// 传入的参数会被包装在 detail 下面</span></span><br><span class="line">  <span class="comment">// 上面的第二个入参 myEventDetail</span></span><br><span class="line">  <span class="keyword">let</span> res = data.detail</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="拓展slot"><a href="#拓展slot" class="headerlink" title="拓展slot"></a>拓展<code>slot</code></h6><p>和<code>Vue</code>一样，小程序组件也支持 <code>slot</code>。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;component-dialog&gt;</span><br><span class="line">  &lt;view slot=<span class="string">"header"</span>&gt;</span><br><span class="line">    &lt;view&gt;提示&lt;<span class="regexp">/view&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>view&gt;</span><br><span class="line">  &lt;view slot=<span class="string">"content"</span>&gt;</span><br><span class="line">    &lt;view&gt;&#123;&#123;dialogText&#125;&#125;&lt;<span class="regexp">/view&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>view&gt;</span><br><span class="line">&lt;<span class="regexp">/component-dialog&gt;</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意: 默认只有一个<code>slot</code>，需要使用多<code>slot</code> 时，可以在组件 <code>js</code> 中声明启用。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">  options: &#123;</span><br><span class="line">    multipleSlots: <span class="literal">true</span> <span class="comment">// 在组件定义时的选项中启用多slot支持</span></span><br><span class="line">  &#125;,</span><br><span class="line">  properties: &#123; <span class="comment">/* ... */</span> &#125;,</span><br><span class="line">  methods: &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="跨端能力"><a href="#跨端能力" class="headerlink" title="跨端能力"></a>跨端能力</h2><p>随着小程序生态的不断扩大，小程序现在具备了载入<code>H5</code>、唤起<code>App</code>、跳转至其他小程序等能力，本节将向大家详细介绍这些跨端能力。<br><img src="http://oy0oxkhrp.bkt.clouddn.com/WX20180710-161457@2x.png" alt="跨端能力"></p>
+<h4 id="小程序之间跳转"><a href="#小程序之间跳转" class="headerlink" title="小程序之间跳转"></a>小程序之间跳转</h4><p>小程序和小程序之间也可以相互跳转，例如在开通免密支付时，就是商户小程序和微信签约小程序互跳的过程。<code>wx.navigateToMiniProgram()</code> 方法用于处理小程序的跳转。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">wx.navigateToMiniProgram(&#123;</span><br><span class="line">  appId: <span class="string">''</span>,</span><br><span class="line">  path: <span class="string">''</span>,</span><br><span class="line">  extraData: &#123;</span><br><span class="line">    <span class="comment">// 传递的参数</span></span><br><span class="line">  &#125;,</span><br><span class="line">  envVersion: <span class="string">'develop'</span>,</span><br><span class="line">  success(res) &#123;</span><br><span class="line">    <span class="comment">// 打开成功</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意</p>
+<ul>
+<li><code>envVersion</code>是要打开的小程序版本，有<code>develop</code>（开发版）、<code>trial</code>（体验版）和<code>release</code>（正式版）。如果当前小程序是正式版，那么跳转到其他小程序也是正式版。</li>
+<li>在开发者工具上调用此<code>API</code>并不会真正地跳转到其他小程序，所以需要真机调试。</li>
+<li>只有同一公众号下关联的小程序才可以互相跳转。</li>
+<li><code>wx.navigateBackMiniProgram()</code>函数用于返回到上一个小程序。<br><code>wx.navigateToMiniProgram</code> 接口即将废弃，可以使用 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html" target="_blank" rel="noopener">navigator</a> 组件来使用此功能。</li>
+</ul>
+</blockquote>
+<h4 id="小程序跳H5"><a href="#小程序跳H5" class="headerlink" title="小程序跳H5"></a>小程序跳H5</h4><h5 id="web-view组件"><a href="#web-view组件" class="headerlink" title="web-view组件"></a><code>web-view</code>组件</h5><p>首先进行微信公众平台业务域名设置</p>
+<p>一个小程序中可能会载入很多 <code>H5</code> 页面，通常我们会创建一个通用的<code>page</code>，来承载这些<code>H5</code> 页面。下面，就来创建这个通用的<code>page</code>，给它起名为<code>web</code>。</p>
+<p>第一步：在 <code>index.wxml</code> 中引入 <code>web-view</code>组件。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- web/index.wxml --&gt;</span><br><span class="line">&lt;view&gt;</span><br><span class="line">  &lt;web-view src=<span class="string">"&#123;&#123;u&#125;&#125;"</span>&gt;&lt;/web-view&gt;</span><br><span class="line">&lt;/view&gt;</span><br></pre></td></tr></table></figure></p>
+<p>第二步：在<code>index.js</code>中读取数据。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">  name: <span class="string">'web'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    u: <span class="string">''</span></span><br><span class="line">  &#125;,</span><br><span class="line">  onLoad(option) &#123;</span><br><span class="line">    <span class="keyword">const</span> u = option.u</span><br><span class="line">    <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">      u</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'[web-view url]'</span>, u)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>我们先将<code>url</code>进行<code>decodeURIComponent(option.u)</code></p>
+</blockquote>
+<p>第三步:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wx.navigateTo(&#123;</span><br><span class="line">  url: <span class="string">`/pages/web/index?u=<span class="subst">$&#123;url&#125;</span>`</span> </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>####H5 调用小程序方法</p>
+<h5 id="1-判断环境"><a href="#1-判断环境" class="headerlink" title="1. 判断环境"></a>1. 判断环境</h5><p>利用微信提供的 <code>JSSDK 1.3.2</code>来判断环境。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"https://res.wx.qq.com/open/js/jweixin-1.3.2.js"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<h5 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ready</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">window</span>.__wxjs_environment === <span class="string">'miniprogram'</span>) <span class="comment">// true</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">window</span>.WeixinJSBridge || !WeixinJSBridge.invoke) &#123;</span><br><span class="line">  <span class="built_in">document</span>.addEventListener(<span class="string">'WeixinJSBridgeReady'</span>, ready, <span class="literal">false</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  ready()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wx.miniProgram.getEnv(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res.miniprogram) <span class="comment">// true</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>目前发现如果使用方式二判断环境，只有在小程序内才能走到回调函数，即在浏览器内运行不会打印出<code>false</code> 。</p>
+</blockquote>
+<h5 id="2-处理跳转"><a href="#2-处理跳转" class="headerlink" title="2.处理跳转"></a>2.处理跳转</h5><p>调用如下的方法，就可以跳转到指定的小程序页面了。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wx.miniProgram.navigateTo(&#123;<span class="attr">url</span>: <span class="string">'/path/to/page'</span>&#125;)</span><br></pre></td></tr></table></figure></p>
+<h5 id="3-向小程序发送消息"><a href="#3-向小程序发送消息" class="headerlink" title="3.向小程序发送消息"></a>3.向小程序发送消息</h5><p>小程序端先绑定处理事件：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;web-view src=<span class="string">"&#123;&#123;url&#125;&#125;"</span> bindmessage=<span class="string">"handleMsg"</span>/&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">  handleMsg: <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'h5 postMessage is'</span>, e.detail.data)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><code>H5</code>端触发事件：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wx.miniProgram.postMessage(&#123;<span class="attr">data</span>: <span class="string">'这是一条传递给小程序的消息'</span>&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>会在特定时机（小程序后退、组件销毁、分享）触发并收到消息。</p>
+<hr>
+<p>待续。。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/10/flex-使用总结/" rel="next" title="flex 使用总结">
+                <i class="fa fa-chevron-left"></i> flex 使用总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://oy0oxkhrp.bkt.clouddn.com/avatar.jpeg"
+                alt="xishuang Zhang" />
+            
+              <p class="site-author-name" itemprop="name">xishuang Zhang</p>
+              <p class="site-description motion-element" itemprop="description">stronger.....</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/snlg" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://mailto:a15757102080@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-google"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://segmentfault.com/u/snlg" target="_blank" title="SegmentFault">
+                      
+                        <i class="fa fa-fw fa-trophy"></i>SegmentFault</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/581053d3a22b9d006396be7a" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-spinner"></i>掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/snlg" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.youtube.com/channel/UCqgxg6iHaH6_8XkIwu2jaIg" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基于摩拜小程序分析"><span class="nav-number">1.</span> <span class="nav-text">基于摩拜小程序分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#功能介绍"><span class="nav-number">1.1.</span> <span class="nav-text">功能介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技术演变"><span class="nav-number">1.2.</span> <span class="nav-text">技术演变</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#非组件化-gt-组件化"><span class="nav-number">1.2.1.</span> <span class="nav-text">非组件化 =&gt; 组件化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跨页面通信"><span class="nav-number">1.2.2.</span> <span class="nav-text">跨页面通信</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-官方做法"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">1:官方做法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-摩拜方法"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">2 摩拜方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件基础"><span class="nav-number">1.3.</span> <span class="nav-text">组件基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#组件定义"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">组件定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#组件引用"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">组件引用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#父子通信"><span class="nav-number">1.3.0.3.</span> <span class="nav-text">父子通信</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#父组件向子组件传递信息"><span class="nav-number">1.3.0.3.0.1.</span> <span class="nav-text">父组件向子组件传递信息</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#子组件向父组件传递信息"><span class="nav-number">1.3.0.3.0.2.</span> <span class="nav-text">子组件向父组件传递信息</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#拓展slot"><span class="nav-number">1.3.0.3.0.3.</span> <span class="nav-text">拓展slot</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨端能力"><span class="nav-number">1.4.</span> <span class="nav-text">跨端能力</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#小程序之间跳转"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">小程序之间跳转</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小程序跳H5"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">小程序跳H5</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#web-view组件"><span class="nav-number">1.4.0.2.1.</span> <span class="nav-text">web-view组件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-判断环境"><span class="nav-number">1.4.0.2.2.</span> <span class="nav-text">1. 判断环境</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法一："><span class="nav-number">1.4.0.2.3.</span> <span class="nav-text">方法一：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法二："><span class="nav-number">1.4.0.2.4.</span> <span class="nav-text">方法二：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-处理跳转"><span class="nav-number">1.4.0.2.5.</span> <span class="nav-text">2.处理跳转</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-向小程序发送消息"><span class="nav-number">1.4.0.2.6.</span> <span class="nav-text">3.向小程序发送消息</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xishuang Zhang</span>
+
+  
+</div>
+<div class="theme-info" style='display:block'>
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共8.5k字</span>
+</div>
+<div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    本站访客数:<span id="busuanzi_value_site_uv"></span>
+  </span>
+</div>
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
