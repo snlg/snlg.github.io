@@ -81,17 +81,24 @@
 
 
 
-<meta name="description" content="stronger.....">
+<meta name="description" content="flex 为什么要写这个总结？（只涉及项目上的flex，不涉及容器上的）  1:阮神的东西是阮神的。 2:在阮神基础上的拓展和总结。   属性：  order  flex-grow  flex-shrink flex-basis flex align-self   order比较好理解，数字越小排列越前。默认为0，可以为负。 flex-grow阮神博客里写道:  flex-grow属性定义项目的放">
 <meta property="og:type" content="article">
 <meta property="og:title" content="flex 使用总结">
 <meta property="og:url" content="http://yoursite.com/2018/07/10/flex-使用总结/index.html">
 <meta property="og:site_name" content="博客 | 西爽">
-<meta property="og:description" content="stronger.....">
+<meta property="og:description" content="flex 为什么要写这个总结？（只涉及项目上的flex，不涉及容器上的）  1:阮神的东西是阮神的。 2:在阮神基础上的拓展和总结。   属性：  order  flex-grow  flex-shrink flex-basis flex align-self   order比较好理解，数字越小排列越前。默认为0，可以为负。 flex-grow阮神博客里写道:  flex-grow属性定义项目的放">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-10T03:56:35.000Z">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180711005618.png">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180711010526.png">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180711011235.png">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180711013106.png">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/1111.png">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180711014141.png">
+<meta property="og:updated_time" content="2018-07-10T17:44:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="flex 使用总结">
-<meta name="twitter:description" content="stronger.....">
+<meta name="twitter:description" content="flex 为什么要写这个总结？（只涉及项目上的flex，不涉及容器上的）  1:阮神的东西是阮神的。 2:在阮神基础上的拓展和总结。   属性：  order  flex-grow  flex-shrink flex-basis flex align-self   order比较好理解，数字越小排列越前。默认为0，可以为负。 flex-grow阮神博客里写道:  flex-grow属性定义项目的放">
+<meta name="twitter:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180711005618.png">
 
 
 
@@ -315,7 +322,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  657
                 </span>
               
 
@@ -331,7 +338,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  2
                 </span>
               
             </div>
@@ -352,7 +359,43 @@
       
 
       
-        
+        <h1 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h1><blockquote>
+<p>为什么要写这个总结？（只涉及项目上的flex，不涉及容器上的）</p>
+<ul>
+<li>1:阮神的东西是阮神的。</li>
+<li>2:在阮神基础上的拓展和总结。</li>
+</ul>
+</blockquote>
+<p><strong>属性：</strong></p>
+<ul>
+<li><strong>order</strong> </li>
+<li><strong>flex-grow</strong> </li>
+<li><strong>flex-shrink</strong></li>
+<li><strong>flex-basis</strong></li>
+<li><strong>flex</strong></li>
+<li><strong>align-self</strong></li>
+</ul>
+<hr>
+<h2 id="order"><a href="#order" class="headerlink" title="order"></a>order</h2><p>比较好理解，数字越小排列越前。默认为0，可以为负。</p>
+<h2 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a>flex-grow</h2><p>阮神博客里写道:</p>
+<blockquote>
+<p><code>flex-grow</code>属性定义项目的放大比例，默认为<code>0</code>，即如果存在剩余空间，也不放大。<br>如果所有项目的<code>flex-grow</code>属性都为<code>1</code>，则它们将等分剩余空间（如果有的话）。如果一个项目的<code>flex-grow</code>属性为<code>2</code>，其他项目都为<code>1</code>，则前者占据的剩余空间将比其他项多一倍。</p>
+</blockquote>
+<p>我拓展下自己的理解:<br>其实阮神上述最关键的词是<strong>剩余空间</strong>。<br>并且，测试的时候发现，flex是动态计算的结果，并不是静态的。<br>举例:<br>1:  内容一致，都是<code>flex-grow:1;</code>则宽度一致。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.a</span>&#123;</span><br><span class="line">  <span class="attribute">background</span>: red;</span><br><span class="line">  <span class="attribute">flex-grow</span>: <span class="number">1</span>; </span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.b</span>&#123;</span><br><span class="line">   <span class="attribute">background</span>: blue;</span><br><span class="line">   <span class="attribute">flex-grow</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.c</span>&#123;</span><br><span class="line">  <span class="attribute">background</span>: green;</span><br><span class="line">  <span class="attribute">flex-grow</span>: <span class="number">1</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://oy0oxkhrp.bkt.clouddn.com/20180711005618.png" alt=""></p>
+<p>2: 内容不一致，都是<code>flex-grow:1;</code> 则:<br><img src="http://oy0oxkhrp.bkt.clouddn.com/20180711010526.png" alt=""></p>
+<p>3:有固定宽度，都是<code>flex-grow:1;</code> 则:<br><img src="http://oy0oxkhrp.bkt.clouddn.com/20180711011235.png" alt=""></p>
+<p>这边需要解释一下，白色宽度写死<code>100px</code>，为什么展示有<code>185.266px</code>?,而后面两者为什么都是<code>94.88px</code>，其实原理很简单。还是平分了剩余空间，<code>3</code>个<code>flex-grow:1;</code> 的项目都分得了<code>85.266px</code>。分别加上原先的<code>100px</code>和字体大小<code>9.61px</code> 所以变成了上图。<br>同理其他比例也非常好理解。</p>
+<h2 id="flex-shrink"><a href="#flex-shrink" class="headerlink" title="flex-shrink"></a>flex-shrink</h2><p>阮神博客里写道:</p>
+<p><code>flex-shrink</code>属性定义了项目的缩小比例，默认为<code>1</code>，即如果空间不足，该项目将缩小。<br>如果所有项目的<code>flex-shrink</code>属性都为<code>1</code>，当空间不足时，都将等比例缩小。如果一个项目的<code>flex-shrink</code>属性为<code>0</code>，其他项目都为<code>1</code>，则空间不足时，前者不缩小。负值对该属性无效。</p>
+<p>但是其实也并非那么简单。当不换行产生空间不足的情况下：<br>1: 空间不足，缩放比例也不足（有元素到达最小宽度）<br><img src="http://oy0oxkhrp.bkt.clouddn.com/20180711013106.png" alt=""><br> <img src="http://oy0oxkhrp.bkt.clouddn.com/1111.png" alt=""><br>上述最小宽度为:</p>
+<ul>
+<li>项目内宽度<code>auto</code>则最小值取内容宽度。</li>
+<li>项目中设定固定宽度，则最小值为设定的宽度。</li>
+</ul>
+<p>2: 空间不足，演示不同<code>flex-shrink</code> 所缩放的比例。<br>为了直观表达。为用<code>2</code>个<code>div</code>来展示。<br><img src="http://oy0oxkhrp.bkt.clouddn.com/20180711014141.png" alt=""><br>蓝色,绿色的宽度都是<code>375px</code>，蓝色<code>flex-shrink</code>为<code>2</code>,绿色<code>flex-shrink</code>为<code>1</code>。</p>
+<p>先演示这<code>3</code>个吧。。。。明天补充完整</p>
+
       
     </div>
     
@@ -441,8 +484,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -554,6 +606,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#flex"><span class="nav-number">1.</span> <span class="nav-text">flex</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#order"><span class="nav-number">1.1.</span> <span class="nav-text">order</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-grow"><span class="nav-number">1.2.</span> <span class="nav-text">flex-grow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-shrink"><span class="nav-number">1.3.</span> <span class="nav-text">flex-shrink</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -578,7 +646,7 @@
 </div>
 <div class="theme-info" style='display:block'>
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共8.5k字</span>
+  <span class="post-count">博客全站共9.1k字</span>
 </div>
 <div class="powered-by">
   <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
