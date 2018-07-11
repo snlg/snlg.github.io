@@ -94,7 +94,8 @@
 <meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180711013106.png">
 <meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/1111.png">
 <meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180711014141.png">
-<meta property="og:updated_time" content="2018-07-10T17:44:00.000Z">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180711094805.png">
+<meta property="og:updated_time" content="2018-07-11T02:08:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="flex 使用总结">
 <meta name="twitter:description" content="flex 为什么要写这个总结？（只涉及项目上的flex，不涉及容器上的）  1:阮神的东西是阮神的。 2:在阮神基础上的拓展和总结。   属性：  order  flex-grow  flex-shrink flex-basis flex align-self   order比较好理解，数字越小排列越前。默认为0，可以为负。 flex-grow阮神博客里写道:  flex-grow属性定义项目的放">
@@ -322,7 +323,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  657
+                  934
                 </span>
               
 
@@ -338,7 +339,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2
+                  3
                 </span>
               
             </div>
@@ -395,6 +396,13 @@
 </ul>
 <p>2: 空间不足，演示不同<code>flex-shrink</code> 所缩放的比例。<br>为了直观表达。为用<code>2</code>个<code>div</code>来展示。<br><img src="http://oy0oxkhrp.bkt.clouddn.com/20180711014141.png" alt=""><br>蓝色,绿色的宽度都是<code>375px</code>，蓝色<code>flex-shrink</code>为<code>2</code>,绿色<code>flex-shrink</code>为<code>1</code>。</p>
 <p>先演示这<code>3</code>个吧。。。。明天补充完整</p>
+<p>继续上文。</p>
+<p>##flex-basis<br>依旧是阮神的博客:<br><code>flex-basis</code>属性定义了在分配多余空间之前，项目占据的主轴空间（<code>main size</code>）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为<code>auto</code>，即项目的本来大小。<br>它可以设为跟<code>width</code>或<code>height</code>属性一样的值（比如<code>350px</code>），则项目将占据固定空间。</p>
+<p>这边有一个关键时间节点<code>分配多余空间前</code>。其实这个就比较好理解了，对于需要分配多余空间的项目(<code>前提是flex-grow属性不为0</code>)，计算多余空间优先使用该属性。<br>假设现在有<code>2</code>个<code>100px</code>的项目，在<code>375px</code>的容器中产生<code>175px</code>的空余空间。则需要平分空间，接下来场景测试。</p>
+<p> 把<code>b</code>项目的<code>flex-base</code>设置成<code>75px</code>，则需要以<code>100:100</code>比例平分<code>375-(70+100) = 200</code>,所以<code>b</code>宽度是<code>175</code>。<br> 说到这里又有<code>1</code>点需要注意:</p>
+<blockquote>
+<p>当属性<code>flex-base</code>被设置时，分配到宽度之后，是以<code>flex-base</code>作为基础计算，而不是设置的<code>width</code>。<br> <img src="http://oy0oxkhrp.bkt.clouddn.com/20180711094805.png" alt=""></p>
+</blockquote>
 
       
     </div>
@@ -646,7 +654,7 @@
 </div>
 <div class="theme-info" style='display:block'>
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共9.1k字</span>
+  <span class="post-count">博客全站共9.4k字</span>
 </div>
 <div class="powered-by">
   <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
