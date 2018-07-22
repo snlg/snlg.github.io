@@ -81,26 +81,17 @@
 
 
 
-<meta name="description" content="flex 为什么要写这个总结？（只涉及项目上的flex，不涉及容器上的）  1:阮神的东西是阮神的。 2:在阮神基础上的拓展和总结。   属性：  order  flex-grow  flex-shrink flex-basis flex align-self   order比较好理解，数字越小排列越前。默认为0，可以为负。 flex-grow阮神博客里写道:  flex-grow属性定义项目的放">
+<meta name="description" content="antd 源码知识点记录（1） 不想留下模棱两可的东西  入口文件index camelCase函数实现 require.context 详解。 exports和module.exports的区别以及最后一句module.exports的作用  组件 Icon omit:是移出对象的指定属性，而实现浅拷贝。阮一峰,司徒正美,芋头,Tencent. omit 的作用详解 如何实现Icon的动画  组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="flex 使用总结">
-<meta property="og:url" content="http://yoursite.com/2018/07/10/flex-使用总结/index.html">
+<meta property="og:title" content="antd 源码阅读(1)">
+<meta property="og:url" content="http://yoursite.com/2018/07/22/antd-源码阅读-1/index.html">
 <meta property="og:site_name" content="博客 | 西爽">
-<meta property="og:description" content="flex 为什么要写这个总结？（只涉及项目上的flex，不涉及容器上的）  1:阮神的东西是阮神的。 2:在阮神基础上的拓展和总结。   属性：  order  flex-grow  flex-shrink flex-basis flex align-self   order比较好理解，数字越小排列越前。默认为0，可以为负。 flex-grow阮神博客里写道:  flex-grow属性定义项目的放">
+<meta property="og:description" content="antd 源码知识点记录（1） 不想留下模棱两可的东西  入口文件index camelCase函数实现 require.context 详解。 exports和module.exports的区别以及最后一句module.exports的作用  组件 Icon omit:是移出对象的指定属性，而实现浅拷贝。阮一峰,司徒正美,芋头,Tencent. omit 的作用详解 如何实现Icon的动画  组">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180711005618.png">
-<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180711010526.png">
-<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180711011235.png">
-<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180711013106.png">
-<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/1111.png">
-<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180711014141.png">
-<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180711094805.png">
-<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180712005454.png">
-<meta property="og:updated_time" content="2018-07-11T17:00:50.000Z">
+<meta property="og:updated_time" content="2018-07-22T07:01:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="flex 使用总结">
-<meta name="twitter:description" content="flex 为什么要写这个总结？（只涉及项目上的flex，不涉及容器上的）  1:阮神的东西是阮神的。 2:在阮神基础上的拓展和总结。   属性：  order  flex-grow  flex-shrink flex-basis flex align-self   order比较好理解，数字越小排列越前。默认为0，可以为负。 flex-grow阮神博客里写道:  flex-grow属性定义项目的放">
-<meta name="twitter:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180711005618.png">
+<meta name="twitter:title" content="antd 源码阅读(1)">
+<meta name="twitter:description" content="antd 源码知识点记录（1） 不想留下模棱两可的东西  入口文件index camelCase函数实现 require.context 详解。 exports和module.exports的区别以及最后一句module.exports的作用  组件 Icon omit:是移出对象的指定属性，而实现浅拷贝。阮一峰,司徒正美,芋头,Tencent. omit 的作用详解 如何实现Icon的动画  组">
 
 
 
@@ -130,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/10/flex-使用总结/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/22/antd-源码阅读-1/"/>
 
 
 
 
 
-  <title>flex 使用总结 | 博客 | 西爽</title>
+  <title>antd 源码阅读(1) | 博客 | 西爽</title>
   
 
 
@@ -263,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/10/flex-使用总结/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/22/antd-源码阅读-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xishuang Zhang">
@@ -280,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">flex 使用总结</h1>
+          <h1 class="post-title" itemprop="name headline">antd 源码阅读(1)</h1>
         
 
         <div class="post-meta">
@@ -292,8 +283,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-10T11:56:35+08:00">
-                2018-07-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-22T14:54:46+08:00">
+                2018-07-22
               </time>
             
 
@@ -324,7 +315,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,359
+                  592
                 </span>
               
 
@@ -340,7 +331,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  5
+                  3
                 </span>
               
             </div>
@@ -361,58 +352,52 @@
       
 
       
-        <h1 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h1><blockquote>
-<p>为什么要写这个总结？（只涉及项目上的flex，不涉及容器上的）</p>
-<ul>
-<li>1:阮神的东西是阮神的。</li>
-<li>2:在阮神基础上的拓展和总结。</li>
+        <h1 id="antd-源码知识点记录（1）"><a href="#antd-源码知识点记录（1）" class="headerlink" title="antd 源码知识点记录（1）"></a>antd 源码知识点记录（1）</h1><blockquote>
+<p>不想留下模棱两可的东西</p>
+</blockquote>
+<h2 id="入口文件index"><a href="#入口文件index" class="headerlink" title="入口文件index"></a>入口文件index</h2><ul>
+<li><code>camelCase</code>函数实现</li>
+<li><a href="https://juejin.im/entry/590c2777128fe10058392598" target="_blank" rel="noopener"><code>require.context</code> 详解</a>。</li>
+<li><a href="https://cnodejs.org/topic/5231a630101e574521e45ef8" target="_blank" rel="noopener"><code>exports</code>和<code>module.exports</code>的区别以及最后一句<code>module.exports</code>的作用</a></li>
 </ul>
-</blockquote>
-<p><strong>属性：</strong></p>
-<ul>
-<li><strong>order</strong> </li>
-<li><strong>flex-grow</strong> </li>
-<li><strong>flex-shrink</strong></li>
-<li><strong>flex-basis</strong></li>
-<li><strong>flex</strong></li>
-<li><strong>align-self</strong></li>
+<h2 id="组件-Icon"><a href="#组件-Icon" class="headerlink" title="组件 Icon"></a>组件 Icon</h2><ul>
+<li><code>omit</code>:是移出对象的指定属性，而实现浅拷贝。<a href="http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_inheritance_continued.html" target="_blank" rel="noopener">阮一峰</a>,<a href="https://www.cnblogs.com/rubylouvre/archive/2010/03/26/1696600.html" target="_blank" rel="noopener">司徒正美</a>,<a href="http://www.html-js.com/article/3749" target="_blank" rel="noopener">芋头</a>,<a href="http://www.alloyteam.com/2017/08/12978/" target="_blank" rel="noopener">Tencent</a>.</li>
+<li><code>omit</code> 的作用详解</li>
+<li>如何实现<code>Icon</code>的动画</li>
 </ul>
-<hr>
-<h2 id="order"><a href="#order" class="headerlink" title="order"></a>order</h2><p>比较好理解，数字越小排列越前。默认为0，可以为负。</p>
-<h2 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a>flex-grow</h2><p>阮神博客里写道:</p>
-<blockquote>
-<p><code>flex-grow</code>属性定义项目的放大比例，默认为<code>0</code>，即如果存在剩余空间，也不放大。<br>如果所有项目的<code>flex-grow</code>属性都为<code>1</code>，则它们将等分剩余空间（如果有的话）。如果一个项目的<code>flex-grow</code>属性为<code>2</code>，其他项目都为<code>1</code>，则前者占据的剩余空间将比其他项多一倍。</p>
+<h2 id="组件-Button"><a href="#组件-Button" class="headerlink" title="组件 Button"></a>组件 Button</h2><ul>
+<li>这里的意思是将传入两个参数，<code>React</code>.<code>Component</code>的参数第一个是<code>Props</code>，第二个是<code>state</code>，并且进行类型检查，<code>props</code>满足<code>type</code>: <code>ButtonProps</code>, <code>state</code> 任意。<blockquote>
+<p>为什么是这两个入参？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export default class Button extends React.Component&lt;ButtonProps, any&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
-<p>我拓展下自己的理解:<br>其实阮神上述最关键的词是<strong>剩余空间</strong>。<br>并且，测试的时候发现，flex是动态计算的结果，并不是静态的。<br>举例:<br>1:  内容一致，都是<code>flex-grow:1;</code>则宽度一致。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.a</span>&#123;</span><br><span class="line">  <span class="attribute">background</span>: red;</span><br><span class="line">  <span class="attribute">flex-grow</span>: <span class="number">1</span>; </span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.b</span>&#123;</span><br><span class="line">   <span class="attribute">background</span>: blue;</span><br><span class="line">   <span class="attribute">flex-grow</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.c</span>&#123;</span><br><span class="line">  <span class="attribute">background</span>: green;</span><br><span class="line">  <span class="attribute">flex-grow</span>: <span class="number">1</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://oy0oxkhrp.bkt.clouddn.com/20180711005618.png" alt=""></p>
-<p>2: 内容不一致，都是<code>flex-grow:1;</code> 则:<br><img src="http://oy0oxkhrp.bkt.clouddn.com/20180711010526.png" alt=""></p>
-<p>3:有固定宽度，都是<code>flex-grow:1;</code> 则:<br><img src="http://oy0oxkhrp.bkt.clouddn.com/20180711011235.png" alt=""></p>
-<p>这边需要解释一下，白色宽度写死<code>100px</code>，为什么展示有<code>185.266px</code>?,而后面两者为什么都是<code>94.88px</code>，其实原理很简单。还是平分了剩余空间，<code>3</code>个<code>flex-grow:1;</code> 的项目都分得了<code>85.266px</code>。分别加上原先的<code>100px</code>和字体大小<code>9.61px</code> 所以变成了上图。<br>同理其他比例也非常好理解。</p>
-<h2 id="flex-shrink"><a href="#flex-shrink" class="headerlink" title="flex-shrink"></a>flex-shrink</h2><p>阮神博客里写道:</p>
-<p><code>flex-shrink</code>属性定义了项目的缩小比例，默认为<code>1</code>，即如果空间不足，该项目将缩小。<br>如果所有项目的<code>flex-shrink</code>属性都为<code>1</code>，当空间不足时，都将等比例缩小。如果一个项目的<code>flex-shrink</code>属性为<code>0</code>，其他项目都为<code>1</code>，则空间不足时，前者不缩小。负值对该属性无效。</p>
-<p>但是其实也并非那么简单。当不换行产生空间不足的情况下：<br>1: 空间不足，缩放比例也不足（有元素到达最小宽度）<br><img src="http://oy0oxkhrp.bkt.clouddn.com/20180711013106.png" alt=""><br> <img src="http://oy0oxkhrp.bkt.clouddn.com/1111.png" alt=""><br>上述最小宽度为:</p>
-<ul>
-<li>项目内宽度<code>auto</code>则最小值取内容宽度。</li>
-<li>项目中设定固定宽度，则最小值为设定的宽度。</li>
+</li>
 </ul>
-<p>2: 空间不足，演示不同<code>flex-shrink</code> 所缩放的比例。<br>为了直观表达。为用<code>2</code>个<code>div</code>来展示。<br><img src="http://oy0oxkhrp.bkt.clouddn.com/20180711014141.png" alt=""><br>蓝色,绿色的宽度都是<code>375px</code>，蓝色<code>flex-shrink</code>为<code>2</code>,绿色<code>flex-shrink</code>为<code>1</code>。</p>
-<p>先演示这<code>3</code>个吧。。。。明天补充完整</p>
-<p>继续上文。</p>
-<h2 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h2><p>依旧是阮神的博客:<br><code>flex-basis</code>属性定义了在分配多余空间之前，项目占据的主轴空间（<code>main size</code>）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为<code>auto</code>，即项目的本来大小。<br>它可以设为跟<code>width</code>或<code>height</code>属性一样的值（比如<code>350px</code>），则项目将占据固定空间。</p>
-<p>这边有一个关键时间节点<code>分配多余空间前</code>。其实这个就比较好理解了，对于需要分配多余空间的项目(<code>前提是flex-grow属性不为0</code>)，计算多余空间优先使用该属性。<br>假设现在有<code>2</code>个<code>100px</code>的项目，在<code>375px</code>的容器中产生<code>175px</code>的空余空间。则需要平分空间，接下来场景测试。</p>
-<p> 把<code>b</code>项目的<code>flex-base</code>设置成<code>75px</code>，则需要以<code>100:100</code>比例平分<code>375-(70+100) = 200</code>,所以<code>b</code>宽度是<code>175</code>。<br> 说到这里又有<code>1</code>点需要注意:</p>
-<blockquote>
-<p>当属性<code>flex-base</code>被设置时，分配到宽度之后，是以<code>flex-base</code>作为基础计算，而不是设置的<code>width</code>。<br> <img src="http://oy0oxkhrp.bkt.clouddn.com/20180711094805.png" alt=""></p>
-</blockquote>
-<h2 id="flex-1"><a href="#flex-1" class="headerlink" title="flex"></a>flex</h2><p>先按照老套路引入阮神的文章:<br><code>flex</code>属性是<code>flex-grow</code>, <code>flex-shrink</code> 和 <code>flex-basis</code>的简写，默认值为<code>0 1 auto</code>。后两个属性可选。</p>
-<blockquote>
-<p>该属性有两个快捷值：<code>auto (1 1 auto)</code> 和<code>none (0 0 auto)</code>。</p>
-</blockquote>
-<p>其实理解了上面<code>3</code>个属性的详细介绍，<code>flex</code>属性也理解了。<br>建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。<br>下面详细说下常用的<code>flex：1</code>的一个特殊场景，其实他就是<code>(1 1 auto)</code>的缩写。并且也等于<code>flex-grow: 1</code>。<br><figure class="highlight htmlbars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class="block"&gt;</span><br><span class="line">   &lt;div class="left"&gt;2&lt;/div&gt;</span><br><span class="line">	  &lt;div class="right"&gt;</span><br><span class="line">        &lt;p&gt;测试字体溢出为止测试字体溢出为止测试字体溢出为止测试字体溢出为止测试字体溢出为止&lt;/p&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
-<p>非常常规的布局，容器flex，主轴平均横铺，不换行。左侧left宽度写死100px，右侧看似是一个单行溢出的p标签。<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.block</span>&#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: space-between;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#FFF</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.left</span>&#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">background</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.right</span>&#123;</span><br><span class="line">  <span class="attribute">flex</span>:<span class="number">1</span>;</span><br><span class="line">  <span class="attribute">background</span>: blue;</span><br><span class="line">  <span class="comment">/* overflow: hidden; */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.right</span> &gt; * &#123;</span><br><span class="line">  <span class="attribute">white-space</span>: nowrap;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>但是问题来了。<br><img src="http://oy0oxkhrp.bkt.clouddn.com/20180712005454.png" alt=""><br>很明显，左侧flex-shrink默认是1，表示空间不足时缩小，并且忽略width属性。最小宽度为min-width或者内容宽度。<br>但是右侧，竟然没有单行溢出的表现。<br>这里先看看解决方案<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.right</span> &#123;</span><br><span class="line">   <span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line">   <span class="attribute">overflow</span>: hidden；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p> 或者<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.right</span> &#123;</span><br><span class="line">   <span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line">   <span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>看到这里我也想知道原理是什么，为什么需要这样处理。等下次分析BFC再说吧。。</p>
+<p>-</p>
+<h1 id="问题解析"><a href="#问题解析" class="headerlink" title="问题解析"></a>问题解析</h1><h2 id="camelCase"><a href="#camelCase" class="headerlink" title="camelCase"></a><code>camelCase</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function camelCase(name) &#123;</span><br><span class="line">  return name.charAt(0).toUpperCase() +</span><br><span class="line">    name.slice(1).replace(/-(\w)/g, (m, n) =&gt; &#123;</span><br><span class="line">      return n.toUpperCase();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>1:<string>.charAt(index). 从0开始取长度为1的字符串，index 为负时候或者超出范围，取不到为” “.</string></p>
+<p>2:slice(start,end)方法是字符串和数组都有的。</p>
+<ul>
+<li><p>字符串中: start可以为负，-1表示最后一个。start在切割结果中,end不在切割结果中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var str=&quot;Hello world!&quot;</span><br><span class="line">str.slice(-2,-1)</span><br><span class="line">// &quot;d&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组中:  用法和上述一致。提醒一点是: Array.prototype.slice()方法是会生成一个新数组的。(纯函数)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let a = [&quot;George&quot;,&quot;John&quot;,&quot;Thomas&quot;,&quot;James&quot;,&quot;Adrew&quot;,&quot;Martin&quot;];</span><br><span class="line">let b = a.slice(2,4);</span><br><span class="line">console.log(a)</span><br><span class="line">// [&quot;George&quot;,&quot;John&quot;,&quot;Thomas&quot;,&quot;James&quot;,&quot;Adrew&quot;,&quot;Martin&quot;];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>同时拓展下splice。<br>区别在于1:第二个参数为删除的长度。2:新增第三个插入元素参数 3： 拷贝过程。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let a = [&quot;George&quot;,&quot;John&quot;,&quot;Thomas&quot;,&quot;James&quot;,&quot;Adrew&quot;,&quot;Martin&quot;];</span><br><span class="line">let b = a.splice(2,3,&quot;William&quot;);</span><br><span class="line">console.log(a)</span><br><span class="line">// [&quot;George&quot;,&quot;John&quot;,&quot;William&quot;,&quot;Martin&quot;];</span><br></pre></td></tr></table></figure></p>
+<p>3: String.replace()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = &apos;abcabc&apos;</span><br><span class="line">a.replace(&apos;a&apos;,&apos;1&apos;)</span><br><span class="line">// &apos;1bcabc&apos;</span><br><span class="line"></span><br><span class="line">var a = &apos;abcabc&apos;</span><br><span class="line">a.replace(/a/g,&apos;1&apos;)</span><br><span class="line">// &apos;1bc1bc&apos;</span><br></pre></td></tr></table></figure></p>
+<p>该函数中的作用是: 匹配‘-’和并且变成大写。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">camelCase(&apos;abc -cbaw-cda&apos;)</span><br><span class="line">// &quot;Abc CbawCda&quot;</span><br></pre></td></tr></table></figure></p>
+<h2 id="require-context"><a href="#require-context" class="headerlink" title="require.context"></a>require.context</h2><p>The syntax is as follows:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">require.context(directory, useSubdirectories = false, regExp = /^\.\//);</span><br></pre></td></tr></table></figure></p>
+<p>源码中作用为: 在components及子目录下输出所有的/style/index.tsx文件.</p>
+<p>使用方法：<code>context module API</code> </p>
+<p>The exported function has 3 properties: resolve, keys, id.</p>
+<ul>
+<li>resolve is a function and returns the module id of the parsed request.</li>
+<li>keys is a function that returns an array of all possible requests that the context module can handle.</li>
+<li>id is the module id of the context module. This may be useful for module.hot.accept.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const req = require.context(&apos;./components&apos;, true, /^\.\/[^_][\w-]+\/style\/index\.tsx?$/);</span><br><span class="line"></span><br><span class="line">req.keys().forEach((mod) =&gt; &#123;</span><br><span class="line">  let v = req(mod);</span><br><span class="line">  //...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Module-相关的语法"><a href="#Module-相关的语法" class="headerlink" title="Module 相关的语法"></a>Module 相关的语法</h2><p><a href="&#39;http://zzkpro.com/2018/07/22/Module相关的语法/#more&#39;">单独写了一篇</a></p>
 
       
     </div>
@@ -438,8 +423,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/05/git-flow的因地制宜/" rel="next" title="git-flow的因地制宜">
-                <i class="fa fa-chevron-left"></i> git-flow的因地制宜
+              <a href="/2018/07/20/typescript-documentaion-log/" rel="next" title="typescript documentaion log">
+                <i class="fa fa-chevron-left"></i> typescript documentaion log
               </a>
             
           </div>
@@ -448,8 +433,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/10/miniProgram-thinking-2/" rel="prev" title="miniProgram thinking (2)">
-                miniProgram thinking (2) <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/22/Module相关的语法/" rel="prev" title="Module相关的语法">
+                Module相关的语法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -633,7 +618,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#flex"><span class="nav-number">1.</span> <span class="nav-text">flex</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#order"><span class="nav-number">1.1.</span> <span class="nav-text">order</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-grow"><span class="nav-number">1.2.</span> <span class="nav-text">flex-grow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-shrink"><span class="nav-number">1.3.</span> <span class="nav-text">flex-shrink</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-basis"><span class="nav-number">1.4.</span> <span class="nav-text">flex-basis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-1"><span class="nav-number">1.5.</span> <span class="nav-text">flex</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#antd-源码知识点记录（1）"><span class="nav-number">1.</span> <span class="nav-text">antd 源码知识点记录（1）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#入口文件index"><span class="nav-number">1.1.</span> <span class="nav-text">入口文件index</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件-Icon"><span class="nav-number">1.2.</span> <span class="nav-text">组件 Icon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件-Button"><span class="nav-number">1.3.</span> <span class="nav-text">组件 Button</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题解析"><span class="nav-number">2.</span> <span class="nav-text">问题解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#camelCase"><span class="nav-number">2.1.</span> <span class="nav-text">camelCase</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#require-context"><span class="nav-number">2.2.</span> <span class="nav-text">require.context</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Module-相关的语法"><span class="nav-number">2.3.</span> <span class="nav-text">Module 相关的语法</span></a></li></ol></li></ol></div>
             
 
           </div>
