@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/exports">
 <meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/WX20180722-161645@2x.png">
 <meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/WX20180722-170927@2x.png">
-<meta property="og:updated_time" content="2018-07-22T13:02:22.000Z">
+<meta property="og:updated_time" content="2018-07-24T11:41:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Module相关的语法">
 <meta name="twitter:description" content="Module 相关的语法  前言:  之前也没有去仔细研究过这个，在项目中也只是照葫芦画瓢。今天攻破下这块，不想留下模棱两可的东西。  参考文章：  import、require、export、module.exports 混合使用详解 exports、module.exports 和 export、export default 到底是咋回事 http://es6.ruanyifeng.com/#">
@@ -343,7 +343,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,654
+                  1,853
                 </span>
               
 
@@ -359,7 +359,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  7
+                  8
                 </span>
               
             </div>
@@ -427,6 +427,11 @@
 <p>本质上，<code>export default</code>就是输出一个接口叫做<code>default</code>的变量或方法，然后系统允许你为它取任意名字。所以，在导入导出的时候 允许改名。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// modules.js</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x * y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> &#123;add <span class="keyword">as</span> <span class="keyword">default</span>&#125;;</span><br><span class="line"><span class="comment">// 等同于export default add;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// app.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="keyword">default</span> <span class="keyword">as</span> foo &#125; <span class="keyword">from</span> <span class="string">'modules'</span>;</span><br><span class="line"><span class="comment">// 等同于import foo from 'modules';</span></span><br></pre></td></tr></table></figure></p>
 <p>正是因为<code>export default</code>命令其实只是输出一个叫做<code>default</code>的变量，所以它和<code>export</code>不一样后面不能跟变量声明语句。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 正确</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="comment">// 正确</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> a;</span><br><span class="line"><span class="comment">// 错误</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">var</span> a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure></p>
 <p>反之,因为<code>export default</code>命令的本质是将后面的值，赋给<code>default</code>变量，所以可以直接将一个值写在<code>export default</code>之后。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 正确</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="number">42</span>;</span><br><span class="line"><span class="comment">// 报错</span></span><br><span class="line"><span class="keyword">export</span> <span class="number">42</span>;</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import &#123;a&#125; from &apos;./xxx.js&apos;</span><br><span class="line"></span><br><span class="line">a = &#123;&#125;; // Syntax Error : &apos;a&apos; is read-only;</span><br></pre></td></tr></table></figure></p>
+<p>上面代码中，脚本加载了变量a，对其重新赋值就会报错，因为a是一个只读的接口。但是，如果a是一个对象，改写a的属性是允许的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import &#123;a&#125; from &apos;./xxx.js&apos;</span><br><span class="line"></span><br><span class="line">a.foo = &apos;hello&apos;; // 合法操作</span><br></pre></td></tr></table></figure>
+<p>上面代码中，a的属性可以成功改写，并且其他模块也可以读到改写后的值。不过，这种写法很难查错，建议凡是输入的变量，都当作完全只读，轻易不要改变它的属性。<br>但是，同时<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import * as circle from &apos;./circle&apos;;</span><br><span class="line"></span><br><span class="line">// 下面两行都是不允许的</span><br><span class="line">circle.foo = &apos;hello&apos;;</span><br><span class="line">circle.area = function () &#123;&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>整体加载的时候是不允许修改属性的。</p>
 <h2 id="模块的整体加载"><a href="#模块的整体加载" class="headerlink" title="模块的整体加载"></a>模块的整体加载</h2><p>常规用法如下<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="keyword">var</span> firstName = <span class="string">'Michael'</span>;</span><br><span class="line"><span class="keyword">var</span> lastName = <span class="string">'Jackson'</span>;</span><br><span class="line"><span class="keyword">var</span> year = <span class="number">1958</span>;</span><br><span class="line"><span class="keyword">export</span> &#123; firstName, lastName, year &#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="number">42</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//b.js</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> _ <span class="keyword">from</span> <span class="string">'a'</span></span><br><span class="line"><span class="built_in">console</span>.log(_.default) <span class="comment">//42;</span></span><br><span class="line"><span class="built_in">console</span>.log(_.firstName) <span class="comment">//Michael;</span></span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>注意，模块整体加载所在的那个对象（上例是circle），应该是可以静态分析的，所以不允许运行时改变。下面的写法都是不允许的。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> circle <span class="keyword">from</span> <span class="string">'./circle'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面两行都是不允许的</span></span><br><span class="line">circle.foo = <span class="string">'hello'</span>;</span><br><span class="line">circle.area = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br></pre></td></tr></table></figure></p>
@@ -695,7 +700,7 @@
 </div>
 <div class="theme-info" style='display:block'>
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共12.3k字</span>
+  <span class="post-count">博客全站共12.5k字</span>
 </div>
 <div class="powered-by">
   <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
