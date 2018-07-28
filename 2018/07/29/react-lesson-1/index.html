@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="React,Source code," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="博客 | 西爽" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="首先感谢珠峰培训张仁阳老师提供的学习机会。预祝珠峰培训越办越好  目录  入口分析   思想和架构 JSX编译 组件创建 组件渲染   入口分析一张图简而代过 思想和架构 react为什么诞生，为了解决什么问题? 除了你所熟知的dom-diff,virtual dom等概念之外，思考过react还有其他什么创新么?  猜想一下，react内部如何工作。设计思路在mvvm框架没有流行之前，前端使">
+<meta name="keywords" content="React,Source code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React-lesson (1)">
+<meta property="og:url" content="http://yoursite.com/2018/07/29/react-lesson-1/index.html">
+<meta property="og:site_name" content="博客 | 西爽">
+<meta property="og:description" content="首先感谢珠峰培训张仁阳老师提供的学习机会。预祝珠峰培训越办越好  目录  入口分析   思想和架构 JSX编译 组件创建 组件渲染   入口分析一张图简而代过 思想和架构 react为什么诞生，为了解决什么问题? 除了你所熟知的dom-diff,virtual dom等概念之外，思考过react还有其他什么创新么?  猜想一下，react内部如何工作。设计思路在mvvm框架没有流行之前，前端使">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/dc3d635e297ba9fa865773dcab6eea7aca7f274f494f7-4X1cdW_fw658.png">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/React%20%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90%20%281%29.png">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/WechatIMG11.jpeg">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/WX20180728-141257@2x.png">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180729002525.png">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180729003558.png">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/WX20180724-110629@2x.png">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180729004410.png">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/creactClass%E5%87%BD%E6%95%B0%E5%8E%9F%E5%9E%8B%E5%85%B3%E7%B3%BB%E5%88%86%E6%9E%90.png">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180729004816.png">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180729010243.png">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/20180729011257.png">
+<meta property="og:image" content="http://oy0oxkhrp.bkt.clouddn.com/%E5%9B%BE%E7%89%87.png">
+<meta property="og:updated_time" content="2018-07-28T17:51:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React-lesson (1)">
+<meta name="twitter:description" content="首先感谢珠峰培训张仁阳老师提供的学习机会。预祝珠峰培训越办越好  目录  入口分析   思想和架构 JSX编译 组件创建 组件渲染   入口分析一张图简而代过 思想和架构 react为什么诞生，为了解决什么问题? 除了你所熟知的dom-diff,virtual dom等概念之外，思考过react还有其他什么创新么?  猜想一下，react内部如何工作。设计思路在mvvm框架没有流行之前，前端使">
+<meta name="twitter:image" content="http://oy0oxkhrp.bkt.clouddn.com/dc3d635e297ba9fa865773dcab6eea7aca7f274f494f7-4X1cdW_fw658.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/29/react-lesson-1/"/>
+
+
+
+
+
+  <title>React-lesson (1) | 博客 | 西爽</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/snlg" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">博客 | 西爽</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/react-lesson-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xishuang Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oy0oxkhrp.bkt.clouddn.com/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客 | 西爽">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">React-lesson (1)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-29T01:37:29+08:00">
+                2018-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Work/" itemprop="url" rel="index">
+                    <span itemprop="name">Work</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,046
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://oy0oxkhrp.bkt.clouddn.com/dc3d635e297ba9fa865773dcab6eea7aca7f274f494f7-4X1cdW_fw658.png" alt="enter image description here"></p>
+<blockquote>
+<p><strong><code>首先感谢珠峰培训张仁阳老师提供的学习机会。预祝珠峰培训越办越好</code></strong></p>
+</blockquote>
+<p><strong>目录</strong></p>
+<ul>
+<li><strong>入口分析</strong>  </li>
+<li><strong>思想和架构</strong></li>
+<li><strong>JSX编译</strong></li>
+<li><strong>组件创建</strong></li>
+<li><strong>组件渲染</strong></li>
+</ul>
+<hr>
+<h2 id="入口分析"><a href="#入口分析" class="headerlink" title="入口分析"></a>入口分析</h2><p>一张图简而代过<br><img src="http://oy0oxkhrp.bkt.clouddn.com/React%20%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90%20%281%29.png" alt=""></p>
+<h2 id="思想和架构"><a href="#思想和架构" class="headerlink" title="思想和架构"></a>思想和架构</h2><ul>
+<li><code>react</code>为什么诞生，为了解决什么问题?</li>
+<li>除了你所熟知的<code>dom-diff</code>,<code>virtual dom</code>等概念之外，思考过react还有其他什么创新么? </li>
+<li>猜想一下，<code>react</code>内部如何工作。<h3 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h3>在<code>mvvm</code>框架没有流行之前，前端使用<code>jquery</code>和<code>template</code>的时候，每次数据变化，仍然需要操作<code>template</code>全量渲染(更新模板<code>innerHTML</code>)，即使<code>teaplate</code>拆的很细，仍然保证不了有没有变化的<code>dom</code>渲染。缺点也很明显，操作<code>dom</code>非常繁琐，而且在大量修改<code>dom</code>节点性能低下。<br><code>react</code>的灵感来自游戏，当数据变化时，界面仅仅更新变化的一部分形成新的一帧渲染。这是之前框架无法做到的，react处理构建用户界面通过将他们分解为虚拟组件，虚拟组件是react的核心，整个<code>react</code>框架的设计理念，都是围绕虚拟组件进<br>行的。<h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3></li>
+<li><code>ReactTextComponent</code>: <code>react</code>  在文字外层都会包裹一层，用来设置id 用来触发diff算法。</li>
+<li><code>ReactNativeComponent</code>: <code>div</code>和<code>span</code>都是原生组件。<code>react</code>的主要算法(如<code>mount</code>、<code>dom-diff</code>)都是在这里实现。用来<code>dom-diff</code>的在渲染阶段会直接设置在原生组件标签上。(<code>markup</code>拼接的时候插入<code>id</code>)</li>
+<li><code>ReactCompositeComponent</code>: 其实复合组件是最常用的，最终渲染成<code>ReactNativeComponent</code>。复合组件通常以大写开头。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Form&gt; &lt;Form.Item&gt;</span><br><span class="line">用户名:</span><br><span class="line">&lt;input placeholder="请输入用户名" /&gt; &lt;/Form.Item&gt;</span><br><span class="line">&lt;/Form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如上代码的数据结构可以表现为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">&quot;component&quot;: Form&lt;ReactCompositeComponent&gt;, </span><br><span class="line">	&quot;children&quot;: [&#123;</span><br><span class="line">	&quot;component&quot;: Form.Item&lt;ReactCompositeComponent&gt;,</span><br><span class="line">		&quot;children&quot;: [&#123;</span><br><span class="line">		&quot;component&quot;: span&lt;ReactNativeComponent&gt;,</span><br><span class="line">			&quot;children&quot;: string&lt;String&gt; &#125;, </span><br><span class="line">			&#123;</span><br><span class="line">				&quot;component&quot;: input&lt;ReactNativeComponent&gt;, </span><br><span class="line">				&quot;props&quot;: &#123; placeholder: string&lt;String&gt; </span><br><span class="line">			&#125;, </span><br><span class="line">				&quot;children&quot;: []</span><br><span class="line">		&#125;] </span><br><span class="line">	&#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="diff"><a href="#diff" class="headerlink" title="diff"></a>diff</h3><p>从原先的<code>O(n3)</code>变成了现在的<code>O(n)</code>。<br><figure class="highlight htmlbars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt; </span><br><span class="line">	&lt;h1&gt;h1&lt;/h1&gt;</span><br><span class="line">	&lt;h2&gt;h2&lt;/h2&gt; </span><br><span class="line">	&lt;h3&gt;h3&lt;/h3&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<p>变成<br><figure class="highlight htmlbars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">	&lt;h2&gt;h2&lt;/h2&gt; </span><br><span class="line">	&lt;p&gt;p&lt;/p&gt; </span><br><span class="line">	&lt;h3&gt;new h3&lt;/h3&gt; </span><br><span class="line">	&lt;h1&gt;h1&lt;/h1&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<p><code>react</code>是如何做到的呢?<br>最外层的div标签一致，然后对比<code>div</code>的<code>children</code>。 </p>
+<ul>
+<li>循环第一个新节点h2和老节点h1，发现节点类型不同，删除掉h1，插入h2。 </li>
+<li>同理，p不等于h2，删除h2，插入p。</li>
+<li>继续，h3等于h3，更新h3的内容new h3。 </li>
+<li>最后，发现之前没有h1，插入h1。<h3 id="层次"><a href="#层次" class="headerlink" title="层次"></a>层次</h3><h4 id="展示层"><a href="#展示层" class="headerlink" title="展示层"></a>展示层</h4>用户声明、创建虚拟组件以及渲染虚拟组件。<h4 id="Virtual组件层"><a href="#Virtual组件层" class="headerlink" title="Virtual组件层"></a>Virtual组件层</h4><code>react</code>的绝大多数代码，包括虚拟组件的创建、渲染和更新流程<code>dom-diff</code>。<h4 id="基础功能"><a href="#基础功能" class="headerlink" title="基础功能"></a>基础功能</h4>所有公共代码，提供底层功能。<br><img src="http://oy0oxkhrp.bkt.clouddn.com/WechatIMG11.jpeg" alt=""></li>
+<li><code>ReactMount</code>: 顾名思义，负责<code>react</code>组件的渲染</li>
+<li><code>ReactDOM</code>: 用来创建<code>native</code>组件</li>
+<li><code>ReactComponent</code>: <code>react</code>虚拟组件</li>
+<li><code>ReactOwner\ReactCurrentOwner</code>: 父子组件指针 <code>ReactDOMIDOperations</code>: 真实的<code>dom</code>操作</li>
+<li><code>ReactMuticalChildren</code>: <code>dom-diff</code>的实现 功能层(黄色部分):为<code>react</code>业务提供基础功能。<h3 id="模块调用关系以及流程图"><a href="#模块调用关系以及流程图" class="headerlink" title="模块调用关系以及流程图"></a>模块调用关系以及流程图</h3><img src="http://oy0oxkhrp.bkt.clouddn.com/WX20180728-141257@2x.png" alt=""></li>
+<li>配置声明:用户代码</li>
+<li>组件实例化:<code>ReactComponsiteComponent.createClass</code></li>
+<li>组件渲染:<code>ReactMount.renderComponent</code></li>
+<li>处理事件回调:<code>renderComponent-&gt;ReactMount.prepareTopLevelEvents</code></li>
+<li>挂载事件:<code>ReactNativeComponent._updateDOMProperties-&gt;ReactEvent.putListener</code></li>
+<li>界面更新:<code>ReactComposite.setState | ReactComponsite.receiveProps</code></li>
+<li>dom-diff: <code>receiveProps -&gt; ReactMutiChild.updateMultiChild</code></li>
+<li>组件渲染或更新:<code>ReactDOMIDOperations-&gt;DOMChildrenOperations</code></li>
+</ul>
+<h2 id="JSX编译"><a href="#JSX编译" class="headerlink" title="JSX编译"></a>JSX编译</h2><p>先来看一个简单的例子:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ExampleApplication = React.createClass(&#123;</span><br><span class="line">	<span class="keyword">let</span> test = <span class="number">1</span></span><br><span class="line">	render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	   <span class="keyword">return</span> &lt;p&gt;hello world&lt;/p&gt;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br><span class="line">React.renderComponent(</span><br><span class="line">   &lt;ExampleApplication elapsed=&#123;<span class="keyword">new</span> <span class="built_in">Date</span>().getTime()&#125; /&gt;,</span><br><span class="line">   <span class="built_in">document</span>.getElementById(<span class="string">'container'</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>上述<code>demo</code>中<code>js</code>文件里面写了<code>html</code>标签，不经过编译的话在词法解析的时候就会报错。<br>介绍下各个版本编译的区别。<br><img src="http://oy0oxkhrp.bkt.clouddn.com/20180729002525.png" alt=""></p>
+<ul>
+<li>在<code>react-15</code>里，使用<code>babel-preset-react</code>来编译<code>jsx</code>，这个<code>preset</code>又包含了4个插件，其中<code>transform-react-jsx</code>负责编译<code>jsx</code>，调 用了<code>React.createElement</code>函数生成虚拟组件。</li>
+<li><code>react-0.3</code>版本通过<code>JSXTransformer</code>编译之后得到:<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;p&gt;hello world&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 编译成 -&gt; </span></span><br><span class="line"><span class="regexp">React.DOM.p(null,'hello world')</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;ExampleApplication elapsed=&#123;new Date().getTime()&#125; /</span>&gt;</span><br><span class="line"><span class="comment">// 编译成 -&gt; </span></span><br><span class="line">ExampleApplication( &#123;<span class="attr">elapsed</span>:<span class="keyword">new</span> <span class="built_in">Date</span>().getTime()&#125;, <span class="literal">null</span> )</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>我们通过<code>Object.getPrototypeOf</code>分别打印出来两个对象的原型对象<br><img src="http://oy0oxkhrp.bkt.clouddn.com/20180729003558.png" alt="enter image description here"><br>可以看出<code>JSX</code>编译之后</p>
+<ul>
+<li>复合组件，继承<code>ReactCompositeComponentBase</code>的原型对象。</li>
+<li>原生组件，继承<code>ReactNativeComponent</code>的原型对象。<br>上述<code>renderComponent</code>，负责将<code>components</code>实例渲染到给定的<code>container</code>中。渲染之前会先判断<code>components</code>和当前的<code>containers</code>是否已经存在过关联关系。<br>若找到关联关系，则会执行更新流程，使用<code>component</code>的属性更新找到的<code>react</code>组件实例。<br>若没有找到，则会先创建关联关系，然后调用<code>mountComonentIntoNode</code>，将<code>component</code>挂载到<code>container</code>上。<br><img src="http://oy0oxkhrp.bkt.clouddn.com/WX20180724-110629@2x.png" alt="renderComponent渲染前置判断"></li>
+</ul>
+<h2 id="组件创建"><a href="#组件创建" class="headerlink" title="组件创建"></a>组件创建</h2><p><img src="http://oy0oxkhrp.bkt.clouddn.com/20180729004410.png" alt="enter image description here"><br>组件创建流程并不复杂，消费者需要调用<code>createClass</code>，把配置的回调函数(包含初始化、属性、状态、生命周期钩子、渲染、自 定义函数等，以下统称<code>spec</code>)传入即可。<br>声明阶段<code>spec</code>中的渲染函数(<code>render</code>)不能为空，<code>react</code>组件需要根据<code>render</code>的返回值来渲染最终的页面元素。<br>通过学习总结<code>createClass</code>内的关系，如下图：<img src="http://oy0oxkhrp.bkt.clouddn.com/creactClass%E5%87%BD%E6%95%B0%E5%8E%9F%E5%9E%8B%E5%85%B3%E7%B3%BB%E5%88%86%E6%9E%90.png" alt="enter image description here"></p>
+<h2 id="组件渲染"><a href="#组件渲染" class="headerlink" title="组件渲染"></a>组件渲染</h2><p>组件渲染的流程相对比较麻烦。流程如下:<br><img src="http://oy0oxkhrp.bkt.clouddn.com/20180729004816.png" alt="enter image description here"><br>我们一步步来看，首先<code>renderComponent</code>中调用的时候生成了一个<code>reactRootID</code>，这个和容器上的属性id没有关系，是<code>react</code>给组件的一个特殊ID，然后我们将<code>reactRootID</code>和要渲染的<code>container</code>传入<code>mountComponentIntoNode</code>函数。</p>
+<p>从<code>mountComponentIntoNode</code>中我们能看到开启了一个<code>transaction</code>事务，<code>transaction</code>保证渲染阶段不会有任何事件触发，并阻断的 <code>componentDidMount</code>事件，待执行后执行等，<code>transaction</code>在功能一章我们会详细讲解，这里不细讨论。</p>
+<p>在确保事务开启之后执行<code>_mountComponentIntoNode</code>函数，并且调用<code>mountComponent</code>获得要渲染的<code>innerHTML</code>，最后将插入节点中，完成渲染。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">_mountComponentIntoNode: <span class="function"><span class="keyword">function</span>(<span class="params">rootID, container, transaction</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> renderStart = <span class="built_in">Date</span>.now();</span><br><span class="line">      <span class="comment">// 调用ReactCompositeComponent.js</span></span><br><span class="line">      <span class="keyword">var</span> markup = <span class="keyword">this</span>.mountComponent(rootID, transaction);</span><br><span class="line">      ReactMount.totalInstantiationTime += (<span class="built_in">Date</span>.now() - renderStart);</span><br><span class="line">      <span class="keyword">var</span> injectionStart = <span class="built_in">Date</span>.now();</span><br><span class="line">      <span class="comment">// Asynchronously inject markup by ensuring that the container is not in</span></span><br><span class="line">      <span class="comment">// the document when settings its `innerHTML`.</span></span><br><span class="line">      <span class="comment">// 每次更新container时，先从document删除掉，然后插入innerHTML，然后再插入到next节点的前面。</span></span><br><span class="line">      <span class="keyword">var</span> parent = container.parentNode;</span><br><span class="line">      <span class="keyword">if</span> (parent) &#123;</span><br><span class="line">        <span class="keyword">var</span> next = container.nextSibling;</span><br><span class="line">        parent.removeChild(container);</span><br><span class="line">        container.innerHTML = markup;</span><br><span class="line">        <span class="keyword">if</span> (next) &#123;</span><br><span class="line">          parent.insertBefore(container, next);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          parent.appendChild(container);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        container.innerHTML = markup;</span><br><span class="line">      &#125;</span><br><span class="line">      ReactMount.totalInjectionTime += (<span class="built_in">Date</span>.now() - injectionStart);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://oy0oxkhrp.bkt.clouddn.com/20180729010243.png" alt="enter image description here"><br>上面代码部分，插入节点比较好理解一点。最关键的<code>mountComponent</code>方法，如何获取<code>innerHTML</code>我们来看一下。</p>
+<p><strong>ReactCompositeComponent.mountComponent</strong><br>注意这里的类变成了<code>ReactCompositeComponent</code>，源码中调用<code>this.monutComponent</code>，为什么不是调用<br><code>ReactComponent.mountComponent</code>呢?这里使用了多重继承机制<code>mixin</code>。<br><img src="http://oy0oxkhrp.bkt.clouddn.com/20180729011257.png" alt="enter image description here"><br>这里组件的生命周期状态是通过</p>
+<ul>
+<li>组件生命周期：<code>_lifeCycleState</code>(<code>MOUNTED</code>与<code>UNMOUNTED</code>)用来校验<code>react</code>组件的在执行函数时状态值是否正确。</li>
+<li>复合组件生命周期:<code>_compositeLifeCycleState</code>，用来保证<code>setState</code>流程不受其他行为影响。<br><code>_lifeCycleState</code>只是在相应的阶段触发时候用来做校验使用，而且只是给出报错提示。<br><code>_compositeLifeCycleState</code>则会在<code>setState</code>中使用。<code>setState</code>会调用<code>replaceState</code>，然后调用<code>_receivePropsAndState</code>来更新界面。 如果组件正处在<code>mounting</code>的过程或者接收到<code>props</code>的过程中，那么就将<code>state</code>缓存在<code>_pendingState</code>中，并不会更新界面的值。 下次再来理解<code>setState</code>的机制。</li>
+</ul>
+<p><img src="http://oy0oxkhrp.bkt.clouddn.com/%E5%9B%BE%E7%89%87.png" alt="enter image description here"></p>
+<p>组件最终会在<code>_renderValidatedComponent</code>方法中调用<code>this.render</code>来触发。并返回<code>ReactComponsiteComponent</code>或者<code>ReactNativeComponent</code>。得到两种组件之后分别执行对应的mountComponent，当调用<code>ReactComponsiteComponent</code>.<code>mountComponent</code>会继续递归以上过程，直到找到原生组件为止。最终调用<code>ReactNativeComponent.mountComponent</code>,代码如下:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Generates root tag markup then recurses. This method has side effects and</span></span><br><span class="line"><span class="comment">   * is not idempotent.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * @internal</span></span><br><span class="line"><span class="comment">   * @param &#123;string&#125; rootID The root DOM ID for this node.</span></span><br><span class="line"><span class="comment">   * @param &#123;ReactReconcileTransaction&#125; transaction</span></span><br><span class="line"><span class="comment">   * @return &#123;string&#125; The computed markup.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  mountComponent: <span class="function"><span class="keyword">function</span>(<span class="params">rootID, transaction</span>) </span>&#123;</span><br><span class="line">    ReactComponent.Mixin.mountComponent.call(<span class="keyword">this</span>, rootID, transaction);</span><br><span class="line">    assertValidProps(<span class="keyword">this</span>.props);</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="keyword">this</span>._createOpenTagMarkup() +</span><br><span class="line">      <span class="keyword">this</span>._createContentMarkup(transaction) +</span><br><span class="line">      <span class="keyword">this</span>._tagClose</span><br><span class="line">    );</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure></p>
+<p><code>createOpenTagMarkup</code>生成带<code>reactID</code>的起始标签，<code>_createContentMarkup</code>生成组件内容，<code>_tagClose</code>创建组件的闭合标签。至此，<code>mountComponent</code>已经完成了。</p>
+<p>第一期学习到此为止。3天内全部重新回顾一遍。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag"><i class="fa fa-tag"></i> React</a>
+          
+            <a href="/tags/Source-code/" rel="tag"><i class="fa fa-tag"></i> Source code</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/22/Module相关的语法/" rel="next" title="Module相关的语法">
+                <i class="fa fa-chevron-left"></i> Module相关的语法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://oy0oxkhrp.bkt.clouddn.com/avatar.jpeg"
+                alt="xishuang Zhang" />
+            
+              <p class="site-author-name" itemprop="name">xishuang Zhang</p>
+              <p class="site-description motion-element" itemprop="description">stronger.....</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index-1.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index-1.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/snlg" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://mailto:a15757102080@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-google"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://segmentfault.com/u/snlg" target="_blank" title="SegmentFault">
+                      
+                        <i class="fa fa-fw fa-trophy"></i>SegmentFault</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/581053d3a22b9d006396be7a" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-spinner"></i>掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/snlg" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.youtube.com/channel/UCqgxg6iHaH6_8XkIwu2jaIg" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#入口分析"><span class="nav-number">1.</span> <span class="nav-text">入口分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思想和架构"><span class="nav-number">2.</span> <span class="nav-text">思想和架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设计思路"><span class="nav-number">2.1.</span> <span class="nav-text">设计思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件"><span class="nav-number">2.2.</span> <span class="nav-text">组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#diff"><span class="nav-number">2.3.</span> <span class="nav-text">diff</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#层次"><span class="nav-number">2.4.</span> <span class="nav-text">层次</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#展示层"><span class="nav-number">2.4.1.</span> <span class="nav-text">展示层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Virtual组件层"><span class="nav-number">2.4.2.</span> <span class="nav-text">Virtual组件层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基础功能"><span class="nav-number">2.4.3.</span> <span class="nav-text">基础功能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模块调用关系以及流程图"><span class="nav-number">2.5.</span> <span class="nav-text">模块调用关系以及流程图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSX编译"><span class="nav-number">3.</span> <span class="nav-text">JSX编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件创建"><span class="nav-number">4.</span> <span class="nav-text">组件创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件渲染"><span class="nav-number">5.</span> <span class="nav-text">组件渲染</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xishuang Zhang</span>
+
+  
+</div>
+<div class="theme-info" style='display:block'>
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共14.6k字</span>
+</div>
+<div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    本站访客数:<span id="busuanzi_value_site_uv"></span>
+  </span>
+</div>
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
